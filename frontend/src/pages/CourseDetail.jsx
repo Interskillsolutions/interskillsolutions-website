@@ -237,7 +237,11 @@ const CourseDetail = () => {
             <BrochurePopup
                 isOpen={isBrochureOpen}
                 onClose={() => setIsBrochureOpen(false)}
-                brochureUrl={course.brochure ? `${API_URL}${course.brochure}` : null}
+                brochureUrl={
+                    course.brochure
+                        ? (course.brochure.startsWith('http') ? course.brochure : `${API_URL}${course.brochure}`)
+                        : null
+                }
             />
         </div>
     );

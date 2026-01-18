@@ -92,55 +92,32 @@ const AdminCourseForm = () => {
         setFormData({ ...formData, syllabus: newSyllabus });
     };
 
-    const [brochureFile, setBrochureFile] = useState(null);
-
-    const handleFileChange = (e) => {
-        setBrochureFile(e.target.files[0]);
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
 
         try {
             const config = {
-                headers: {
-                    Authorization: `Bearer ${admin.token}`,
-                    'Content-Type': 'multipart/form-data'
-                },
+                headers: { Authorization: `Bearer ${admin.token}` },
             };
 
-            const data = new FormData();
-            data.append('title', formData.title);
-            data.append('description', formData.description);
-            data.append('category', formData.category);
-            data.append('duration', formData.duration);
-            data.append('mode', formData.mode);
-            data.append('fees', formData.fees);
-            data.append('image', formData.image);
-
-            // Clean arrays and stringify them for FormData
-            const highlights = formData.highlights.filter(item => item.trim() !== '');
-            const tools = formData.tools.filter(item => item.trim() !== '');
-            const syllabus = formData.syllabus.filter(mod => mod.title.trim() !== '')
-                .map(mod => ({
-                    ...mod,
-                    topics: mod.topics.filter(t => t.trim() !== '')
-                }));
-
-            data.append('highlights', JSON.stringify(highlights));
-            data.append('tools', JSON.stringify(tools));
-            data.append('syllabus', JSON.stringify(syllabus));
-
-            if (brochureFile) {
-                data.append('brochure', brochureFile);
-            }
+            // Clean up empty strings before sending
+            const cleanedData = {
+                ...formData,
+                highlights: formData.highlights.filter(item => item.trim() !== ''),
+                tools: formData.tools.filter(item => item.trim() !== ''),
+                syllabus: formData.syllabus.filter(mod => mod.title.trim() !== '')
+                    .map(mod => ({
+                        ...mod,
+                        topics: mod.topics.filter(t => t.trim() !== '')
+                    }))
+            };
 
             if (id) {
-                await axios.put(`${API_URL}/api/courses/${id}`, data, config);
+                await axios.put(`${API_URL}/api/courses/${id}`, cleanedData, config);
                 toast.success('Course updated successfully');
             } else {
-                await axios.post(`${API_URL}/api/courses`, data, config);
+                await axios.post(`${API_URL}/api/courses`, cleanedData, config);
                 toast.success('Course created successfully');
             }
             navigate('/admin/courses');
@@ -193,19 +170,15 @@ const AdminCourseForm = () => {
                         <input className="input-field" name="image" value={formData.image} onChange={handleChange} placeholder="https://..." />
                     </div>
                     <div className="md:col-span-2">
-                        <label className="label">Brochure PDF</label>
-                        <div className="flex items-center gap-4">
-                            <input
-                                type="file"
-                                accept="application/pdf"
-                                onChange={handleFileChange}
-                                className="input-field p-1"
-                            />
-                            {formData.brochure && !brochureFile && (
-                                <span className="text-sm text-green-600">Current brochure exists</span>
-                            )}
-                        </div>
-                        <p className="text-xs text-gray-500 mt-1">Upload a PDF brochure (Max 5MB)</p>
+                        <label className="label">Brochure URL</label>
+                        <input
+                            className="input-field"
+                            name="brochure"
+                            value={formData.brochure || ''}
+                            onChange={handleChange}
+                            placeholder="https://drive.google.com/..."
+                        />
+                        <p className="text-xs text-gray-500 mt-1">Paste a link to your brochure (Google Drive, Dropbox, etc.)</p>
                     </div>
                 </div>
 

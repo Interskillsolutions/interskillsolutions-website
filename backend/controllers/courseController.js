@@ -50,20 +50,7 @@ exports.updateCourse = async (req, res) => {
     try {
         const course = await Course.findById(req.params.id);
         if (course) {
-            const courseData = req.body;
-
-            // Handle file upload
-            if (req.file) {
-                courseData.brochure = `/uploads/courses/${req.file.filename}`;
-            }
-
-            // Parse JSON strings if coming from FormData
-            if (typeof courseData.syllabus === 'string') courseData.syllabus = JSON.parse(courseData.syllabus);
-            if (typeof courseData.highlights === 'string') courseData.highlights = JSON.parse(courseData.highlights);
-            if (typeof courseData.tools === 'string') courseData.tools = JSON.parse(courseData.tools);
-            if (typeof courseData.tags === 'string') courseData.tags = JSON.parse(courseData.tags);
-
-            Object.assign(course, courseData);
+            Object.assign(course, req.body);
             const updatedCourse = await course.save();
             res.json(updatedCourse);
         } else {
