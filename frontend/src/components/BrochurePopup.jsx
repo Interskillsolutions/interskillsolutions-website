@@ -4,7 +4,7 @@ import API_URL from '../config';
 import { toast } from 'react-toastify';
 import { FaTimes } from 'react-icons/fa';
 
-const BrochurePopup = ({ isOpen, onClose }) => {
+const BrochurePopup = ({ isOpen, onClose, brochureUrl }) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -25,13 +25,21 @@ const BrochurePopup = ({ isOpen, onClose }) => {
             });
             toast.success('Brochure downloading...');
             onClose();
-            // Trigger download (mock)
-            const link = document.createElement('a');
-            link.href = '/brochure.pdf'; // Ensure this file exists in public folder
-            link.download = 'InterSkill_Brochure.pdf';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+
+            if (brochureUrl) {
+                // Trigger download for dynamic brochure
+                const link = document.createElement('a');
+                link.href = brochureUrl;
+                link.target = '_blank';
+                link.download = 'InterSkill_Brochure.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } else {
+                // Fallback if no specific brochure uploaded
+                toast.info('Brochure not available for this course yet.');
+            }
+
         } catch (error) {
             toast.error('Something went wrong. Please try again.');
         }

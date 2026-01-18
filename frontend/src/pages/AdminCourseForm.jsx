@@ -92,36 +92,60 @@ const AdminCourseForm = () => {
         setFormData({ ...formData, syllabus: newSyllabus });
     };
 
+    const [brochureFile, setBrochureFile] = useState(null);
+
+    const handleFileChange = (e) => {
+        setBrochureFile(e.target.files[0]);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
 
         try {
             const config = {
-                headers: { Authorization: `Bearer ${admin.token}` },
+                headers: {
+                    Authorization: `Bearer ${admin.token}`,
+                    'Content-Type': 'multipart/form-data'
+                },
             };
 
-            // Clean up empty strings before sending
-            const cleanedData = {
-                ...formData,
-                highlights: formData.highlights.filter(item => item.trim() !== ''),
-                tools: formData.tools.filter(item => item.trim() !== ''),
-                syllabus: formData.syllabus.filter(mod => mod.title.trim() !== '')
-                    .map(mod => ({
-                        ...mod,
-                        topics: mod.topics.filter(t => t.trim() !== '')
-                    }))
-            };
+            const data = new FormData();
+            data.append('title', formData.title);
+            data.append('description', formData.description);
+            data.append('category', formData.category);
+            data.append('duration', formData.duration);
+            data.append('mode', formData.mode);
+            data.append('fees', formData.fees);
+            data.append('image', formData.image);
+
+            // Clean arrays and stringify them for FormData
+            const highlights = formData.highlights.filter(item => item.trim() !== '');
+            const tools = formData.tools.filter(item => item.trim() !== '');
+            const syllabus = formData.syllabus.filter(mod => mod.title.trim() !== '')
+                .map(mod => ({
+                    ...mod,
+                    topics: mod.topics.filter(t => t.trim() !== '')
+                }));
+
+            data.append('highlights', JSON.stringify(highlights));
+            data.append('tools', JSON.stringify(tools));
+            data.append('syllabus', JSON.stringify(syllabus));
+
+            if (brochureFile) {
+                data.append('brochure', brochureFile);
+            }
 
             if (id) {
-                await axios.put(`${API_URL}/api/courses/${id}`, cleanedData, config);
+                await axios.put(`${API_URL}/api/courses/${id}`, data, config);
                 toast.success('Course updated successfully');
             } else {
-                await axios.post(`${API_URL}/api/courses`, cleanedData, config);
+                await axios.post(`${API_URL}/api/courses`, data, config);
                 toast.success('Course created successfully');
             }
             navigate('/admin/courses');
         } catch (error) {
+            console.error(error);
             toast.error(error.response?.data?.message || 'Error saving course');
         } finally {
             setLoading(false);
@@ -167,6 +191,21 @@ const AdminCourseForm = () => {
                     <div>
                         <label className="label">Image URL</label>
                         <input className="input-field" name="image" value={formData.image} onChange={handleChange} placeholder="https://..." />
+                    </div>
+                    <div className="md:col-span-2">
+                        <label className="label">Brochure PDF</label>
+                        <div className="flex items-center gap-4">
+                            <input
+                                type="file"
+                                accept="application/pdf"
+                                onChange={handleFileChange}
+                                className="input-field p-1"
+                            />
+                            {formData.brochure && !brochureFile && (
+                                <span className="text-sm text-green-600">Current brochure exists</span>
+                            )}
+                        </div>
+                        <p className="text-xs text-gray-500 mt-1">Upload a PDF brochure (Max 5MB)</p>
                     </div>
                 </div>
 

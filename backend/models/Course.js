@@ -7,6 +7,7 @@ const courseSchema = new mongoose.Schema({
     mode: { type: String, required: true }, // Online, Offline, Hybrid
     fees: { type: String },
     image: { type: String }, // URL or path
+    brochure: { type: String }, // Path to uploaded brochure PDF
     category: { type: String }, // IT, Design, etc.
     tags: [{ type: String }], // Bestseller, Trending, etc.
     highlights: [{ type: String }], // Key features like "100% Placement"
