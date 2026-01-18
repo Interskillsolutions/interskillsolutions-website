@@ -3,7 +3,10 @@ import API_URL from '../config';
 import { motion } from 'framer-motion';
 
 const PlacementPartners = () => {
-    React.useEffect(() => {
+    const [partners, setPartners] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
         const fetchPartners = async () => {
             try {
                 const res = await fetch(`${API_URL}/api/partners`);
