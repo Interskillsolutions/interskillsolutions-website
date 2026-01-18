@@ -41,6 +41,14 @@ const Footer = () => {
                                 </a>
                             </li>
                         ))}
+                        <li>
+                            <a
+                                href="/admin/login"
+                                className="text-gray-400 hover:text-white hover:translate-x-2 transition-all inline-block"
+                            >
+                                Admin Login
+                            </a>
+                        </li>
                     </ul>
                 </motion.div>
 
