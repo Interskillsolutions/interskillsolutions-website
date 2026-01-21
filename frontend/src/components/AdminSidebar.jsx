@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import AuthContext from '../context/AuthContext';
 
 const AdminSidebar = () => {
-    const { logout } = useContext(AuthContext);
+    const { logout, admin } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -43,11 +43,13 @@ const AdminSidebar = () => {
                     <FaEnvelopeOpenText className="mr-3" /> Leads
                 </NavLink>
 
-                {/* 
-                <NavLink to="/admin/users" className={linkClasses}>
-                    <FaUsers className="mr-3" /> Users
-                </NavLink>
-                */}
+
+
+                {admin && admin.role === 'admin' && (
+                    <NavLink to="/admin/users" className={linkClasses}>
+                        <FaUsers className="mr-3" /> Staff
+                    </NavLink>
+                )}
 
             </nav>
 
@@ -57,7 +59,7 @@ const AdminSidebar = () => {
             >
                 <FaSignOutAlt className="mr-3" /> Logout
             </button>
-        </div>
+        </div >
     );
 };
 

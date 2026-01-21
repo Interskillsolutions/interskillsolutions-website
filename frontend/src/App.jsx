@@ -12,6 +12,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import AdminLeads from './pages/AdminLeads';
 import AdminReviews from './pages/AdminReviews';
 import AdminPartners from './pages/AdminPartners';
+import AdminStaff from './pages/AdminStaff';
 import AdminCourses from './pages/AdminCourses';
 import AdminCourseForm from './pages/AdminCourseForm';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -36,6 +37,7 @@ function App() {
             <Route path="leads" element={<AdminLeads />} />
             <Route path="reviews" element={<AdminReviews />} />
             <Route path="partners" element={<AdminPartners />} />
+            <Route path="users" element={<AdminStaff />} />
             <Route path="courses" element={<AdminCourses />} />
             <Route path="courses/add" element={<AdminCourseForm />} />
             <Route path="courses/edit/:id" element={<AdminCourseForm />} />

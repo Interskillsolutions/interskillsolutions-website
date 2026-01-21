@@ -69,9 +69,9 @@ const Footer = () => {
                                 <p>Office No.14, Ground Floor Opp. Moti Mehel Restaurant S.V. Road, Near Andheri Railway Station, Andheri West 400058</p>
                             </div>
                         </div>
-                        <a href="mailto:interskillssolution@gmail.com" className="flex items-center hover:text-white transition-colors">
+                        <a href="mailto:interskillsolution@gmail.com" className="flex items-center hover:text-white transition-colors">
                             <span className="mr-3 text-lg">📧</span>
-                            Interskillssolution@gmail.com
+                            Interskillsolution@gmail.com
                         </a>
                         <a href="tel:9819461050" className="flex items-center hover:text-white transition-colors">
                             <span className="mr-3 text-lg">📞</span>

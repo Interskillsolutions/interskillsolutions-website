@@ -36,6 +36,8 @@ const upload = multer({
     }
 });
 
+const { protect } = require('../middleware/authMiddleware');
+
 // @route   GET /api/partners
 // @desc    Get all partners
 // @access  Public
@@ -51,8 +53,8 @@ router.get('/', async (req, res) => {
 
 // @route   POST /api/partners
 // @desc    Add a new partner
-// @access  Private (Admin only - TODO: Add auth middleware if needed)
-router.post('/', upload.single('logo'), async (req, res) => {
+// @access  Private
+router.post('/', protect, upload.single('logo'), async (req, res) => {
     try {
         if (!req.file) {
             return res.status(400).json({ msg: 'Please upload a logo image' });
@@ -74,7 +76,7 @@ router.post('/', upload.single('logo'), async (req, res) => {
 // @route   DELETE /api/partners/:id
 // @desc    Delete a partner
 // @access  Private
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', protect, async (req, res) => {
     try {
         const partner = await Partner.findById(req.params.id);
 
