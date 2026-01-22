@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { FaTachometerAlt, FaUsers, FaSignOutAlt, FaStar, FaBook, FaChartLine, FaEnvelopeOpenText } from 'react-icons/fa';
+import { FaTachometerAlt, FaUsers, FaSignOutAlt, FaStar, FaBook, FaChartLine, FaEnvelopeOpenText, FaLayerGroup } from 'react-icons/fa';
 import { useContext } from 'react';
 import AuthContext from '../context/AuthContext';
 
@@ -21,6 +21,9 @@ const AdminSidebar = () => {
             <nav className="space-y-2 flex-1">
                 <NavLink to="/admin/dashboard" className={linkClasses}>
                     <FaTachometerAlt className="mr-3" /> Dashboard
+                </NavLink>
+                <NavLink to="/admin/categories" className={linkClasses}>
+                    <FaLayerGroup className="mr-3" /> Categories
                 </NavLink>
 
                 <div className="pt-4 border-t border-gray-700 my-2"></div>

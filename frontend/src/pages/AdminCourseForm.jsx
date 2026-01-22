@@ -25,7 +25,19 @@ const AdminCourseForm = () => {
         syllabus: [{ title: '', topics: [''] }]
     });
 
+    const [existingCategories, setExistingCategories] = useState([]);
+
     useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const { data } = await axios.get(`${API_URL}/api/categories`);
+                setExistingCategories(data.map(c => c.name));
+            } catch (error) {
+                console.error("Failed to fetch categories", error);
+            }
+        };
+        fetchCategories();
+
         if (id) {
             const fetchCourse = async () => {
                 try {
@@ -137,48 +149,118 @@ const AdminCourseForm = () => {
 
             <h1 className="text-3xl font-bold text-gray-800 mb-8">{id ? 'Edit Course' : 'Add New Course'}</h1>
 
-            <form onSubmit={handleSubmit} className="space-y-8 bg-white p-8 rounded-xl shadow-lg">
+            <form onSubmit={handleSubmit} className="space-y-8 bg-white p-8 rounded-xl shadow-lg border border-gray-100">
 
-                {/* Basic Info */}
-                <div className="grid md:grid-cols-2 gap-6">
-                    <div className="md:col-span-2">
-                        <label className="label">Course Title</label>
-                        <input className="input-field" name="title" value={formData.title} onChange={handleChange} required />
+                {/* --- Section 1: Basic Information --- */}
+                <div>
+                    <h3 className="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">Basic Information</h3>
+                    <div className="grid md:grid-cols-2 gap-6">
+                        <div className="md:col-span-2">
+                            <label className="block text-sm font-semibold text-gray-700 mb-1">Course Title</label>
+                            <input
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                                name="title"
+                                value={formData.title}
+                                onChange={handleChange}
+                                placeholder="e.g. Full Stack Web Development"
+                                required
+                            />
+                        </div>
+
+                        <div className="md:col-span-2">
+                            <label className="block text-sm font-semibold text-gray-700 mb-1">Description</label>
+                            <textarea
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all h-32"
+                                name="description"
+                                value={formData.description}
+                                onChange={handleChange}
+                                placeholder="Detailed overview of the course..."
+                                required
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-semibold text-gray-700 mb-1">Category</label>
+                            <select
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all bg-white"
+                                name="category"
+                                value={formData.category}
+                                onChange={handleChange}
+                                required
+                            >
+                                <option value="">Select Category</option>
+                                {existingCategories.map((cat, index) => (
+                                    <option key={index} value={cat}>{cat}</option>
+                                ))}
+                                <option value="Other">Other</option>
+                            </select>
+                            <p className="text-xs text-gray-500 mt-1">Manage categories in the Categories page.</p>
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-semibold text-gray-700 mb-1">Duration</label>
+                            <input
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                                name="duration"
+                                value={formData.duration}
+                                onChange={handleChange}
+                                placeholder="e.g. 12 Weeks"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-semibold text-gray-700 mb-1">Mode</label>
+                            <select
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all bg-white"
+                                name="mode"
+                                value={formData.mode}
+                                onChange={handleChange}
+                            >
+                                <option value="Online">Online</option>
+                                <option value="Offline">Offline</option>
+                                <option value="Hybrid">Hybrid</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-semibold text-gray-700 mb-1">Fees (Optional)</label>
+                            <input
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                                name="fees"
+                                value={formData.fees}
+                                onChange={handleChange}
+                                placeholder="e.g. ₹25,000"
+                            />
+                        </div>
                     </div>
-                    <div className="md:col-span-2">
-                        <label className="label">Description</label>
-                        <textarea className="input-field h-32" name="description" value={formData.description} onChange={handleChange} required />
-                    </div>
-                    <div>
-                        <label className="label">Category</label>
-                        <input className="input-field" name="category" value={formData.category} onChange={handleChange} placeholder="e.g. Data Science" />
-                    </div>
-                    <div>
-                        <label className="label">Duration</label>
-                        <input className="input-field" name="duration" value={formData.duration} onChange={handleChange} placeholder="e.g. 12 Weeks" />
-                    </div>
-                    <div>
-                        <label className="label">Mode</label>
-                        <select className="input-field" name="mode" value={formData.mode} onChange={handleChange}>
-                            <option value="Online">Online</option>
-                            <option value="Offline">Offline</option>
-                            <option value="Hybrid">Hybrid</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label className="label">Image URL</label>
-                        <input className="input-field" name="image" value={formData.image} onChange={handleChange} placeholder="https://..." />
-                    </div>
-                    <div className="md:col-span-2">
-                        <label className="label">Brochure URL</label>
-                        <input
-                            className="input-field"
-                            name="brochure"
-                            value={formData.brochure || ''}
-                            onChange={handleChange}
-                            placeholder="https://drive.google.com/..."
-                        />
-                        <p className="text-xs text-gray-500 mt-1">Paste a link to your brochure (Google Drive, Dropbox, etc.)</p>
+                </div>
+
+                {/* --- Section 2: Media & Resources --- */}
+                <div>
+                    <h3 className="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">Media & Resources</h3>
+                    <div className="grid md:grid-cols-2 gap-6">
+                        <div className="md:col-span-2">
+                            <label className="block text-sm font-semibold text-gray-700 mb-1">Course Image URL</label>
+                            <input
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                                name="image"
+                                value={formData.image}
+                                onChange={handleChange}
+                                placeholder="https://example.com/image.jpg"
+                            />
+                            <p className="text-xs text-gray-500 mt-1">Use the Prompt Generator to create a specialized image.</p>
+                        </div>
+
+                        <div className="md:col-span-2">
+                            <label className="block text-sm font-semibold text-gray-700 mb-1">Brochure URL (PDF)</label>
+                            <input
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                                name="brochure"
+                                value={formData.brochure || ''}
+                                onChange={handleChange}
+                                placeholder="https://drive.google.com/..."
+                            />
+                        </div>
                     </div>
                 </div>
 

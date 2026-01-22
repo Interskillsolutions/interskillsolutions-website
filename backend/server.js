@@ -31,6 +31,8 @@ const leadRoutes = require('./routes/leadRoutes');
 const statRoutes = require('./routes/statRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 const partnerRoutes = require('./routes/partnerRoutes');
+const categoryRoutes = require('./routes/categoryRoutes');
+const requestRoutes = require('./routes/requestRoutes');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/courses', courseRoutes);
@@ -38,6 +40,8 @@ app.use('/api/leads', leadRoutes);
 app.use('/api/stats', statRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/partners', partnerRoutes);
+app.use('/api/categories', categoryRoutes);
+app.use('/api/requests', requestRoutes);
 
 app.get('/', (req, res) => {
     res.send('API is running...');

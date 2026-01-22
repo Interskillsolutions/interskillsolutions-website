@@ -19,16 +19,28 @@ const CourseDetail = () => {
     useEffect(() => {
         const fetchCourse = async () => {
             try {
-                const { data } = await axios.get(`${API_URL}/api/courses`);
-                // Slug matching logic
-                const foundCourse = data.find(c =>
-                    c.title.toLowerCase().replace(/ /g, '-') === id ||
-                    c.title.toLowerCase().includes(id.replace(/-/g, ' '))
-                );
-                setCourse(foundCourse);
+                // Try fetching directly by ID first
+                const { data } = await axios.get(`${API_URL}/api/courses/${id}`);
+                setCourse(data);
                 setLoading(false);
             } catch (error) {
-                console.error('Error fetching course:', error);
+                // If ID fails, likely 404 or invalid format. 
+                // We can try legacy fallback if needed, but since Navbar uses ID now, this should be the primary method.
+                console.error('Error fetching course by ID:', error);
+
+                // Fallback: Fetch all and find by slug (if user typed a URL manually)
+                try {
+                    const { data } = await axios.get(`${API_URL}/api/courses`);
+                    const foundCourse = data.find(c =>
+                        c.title.toLowerCase().replace(/ /g, '-') === id ||
+                        c.title.toLowerCase().includes(id.replace(/-/g, ' '))
+                    );
+                    if (foundCourse) {
+                        setCourse(foundCourse);
+                    }
+                } catch (fallbackError) {
+                    console.error('Fallback fetch failed');
+                }
                 setLoading(false);
             }
         };

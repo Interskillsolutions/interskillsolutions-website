@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 
 const AdminStaff = () => {
     const { token, admin } = useContext(AuthContext);
+    const [requests, setRequests] = useState([]);
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [username, setUsername] = useState('');
@@ -17,10 +18,22 @@ const AdminStaff = () => {
     useEffect(() => {
         if (admin && admin.role === 'admin') {
             fetchUsers();
+            fetchRequests();
         } else {
-            setLoading(false); // Should redirect or show forbidden usually
+            setLoading(false);
         }
     }, [token, admin]);
+
+    const fetchRequests = async () => {
+        try {
+            const res = await axios.get(`${API_URL}/api/requests`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            setRequests(res.data);
+        } catch (err) {
+            console.error('Error fetching requests');
+        }
+    };
 
     const fetchUsers = async () => {
         try {
@@ -34,9 +47,19 @@ const AdminStaff = () => {
             setLoading(false);
             if (err.response && err.response.status === 401) {
                 toast.error('Unauthorized');
-            } else {
-                // toast.error('Failed to load users');
             }
+        }
+    };
+
+    const deleteRequest = async (id) => {
+        try {
+            await axios.delete(`${API_URL}/api/requests/${id}`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            toast.success('Request removed');
+            fetchRequests();
+        } catch (err) {
+            toast.error('Failed to remove request');
         }
     };
 
@@ -69,10 +92,7 @@ const AdminStaff = () => {
     };
 
     const handleDelete = async (id) => {
-        // if (!window.confirm('Are you sure you want to delete this user?')) return;
-
         toast.info('Processing deletion...', { autoClose: 1000 });
-
         try {
             await axios.delete(`${API_URL}/api/auth/users/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
@@ -98,8 +118,61 @@ const AdminStaff = () => {
     return (
         <AdminLayout>
             <div className="p-6">
-                <h1 className="text-3xl font-bold mb-8 text-gray-800">Manage Staff</h1>
+                <h1 className="text-3xl font-bold text-gray-800 mb-8">Manage Staff</h1>
 
+                {/* --- Pending Requests Section --- */}
+                {requests.length > 0 && (
+                    <div className="mb-10 bg-yellow-50 border border-yellow-200 rounded-lg p-6 shadow-sm">
+                        <h2 className="text-xl font-bold text-yellow-800 mb-4 flex items-center">
+                            <span className="bg-yellow-500 text-white text-sm px-2 py-1 rounded-full mr-2">{requests.length}</span>
+                            Pending Staff Requests
+                        </h2>
+                        <div className="overflow-x-auto">
+                            <table className="min-w-full bg-white rounded-lg shadow-sm">
+                                <thead>
+                                    <tr className="bg-yellow-100 text-yellow-900 text-sm uppercase">
+                                        <th className="py-3 px-4 text-left">Full Name</th>
+                                        <th className="py-3 px-4 text-left">Details</th>
+                                        <th className="py-3 px-4 text-left">Proposed Password</th>
+                                        <th className="py-3 px-4 text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="text-gray-700 text-sm">
+                                    {requests.map(req => (
+                                        <tr key={req._id} className="border-b border-yellow-50 last:border-none hover:bg-yellow-50/50">
+                                            <td className="py-3 px-4 font-medium">{req.fullName}</td>
+                                            <td className="py-3 px-4">
+                                                <div className="font-bold">{req.branch}</div>
+                                                <div className="text-xs text-gray-500">{req.email}</div>
+                                                <div className="text-xs text-gray-500">{req.phone}</div>
+                                            </td>
+                                            <td className="py-3 px-4 font-mono bg-gray-50 select-all">{req.password}</td>
+                                            <td className="py-3 px-4 text-center">
+                                                <button
+                                                    onClick={() => {
+                                                        setUsername(req.email); // Auto-fill username
+                                                        setPassword(req.password); // Auto-fill password
+                                                        window.scrollTo({ top: 300, behavior: 'smooth' });
+                                                        toast.info('Credentials copied to form below!');
+                                                    }}
+                                                    className="text-blue-600 hover:text-blue-800 mr-4 font-semibold text-xs border border-blue-200 px-2 py-1 rounded"
+                                                >
+                                                    Process
+                                                </button>
+                                                <button
+                                                    onClick={() => deleteRequest(req._id)}
+                                                    className="text-red-500 hover:text-red-700 transition"
+                                                >
+                                                    <FaTrash />
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                )}
                 {/* Add Staff Form */}
                 <div className="bg-white p-6 rounded-lg shadow-md mb-8">
                     <h2 className="text-xl font-semibold mb-4 flex items-center">
@@ -183,8 +256,7 @@ const AdminStaff = () => {
                     )}
                 </div>
             </div>
-        </AdminLayout>
-    );
+            );
 };
 
-export default AdminStaff;
+            export default AdminStaff;
