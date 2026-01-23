@@ -91,6 +91,20 @@ const AdminStaff = () => {
         }
     };
 
+    const handleRoleUpdate = async (id, newRole) => {
+        try {
+            await axios.put(`${API_URL}/api/auth/users/${id}/role`,
+                { role: newRole },
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+            toast.success(`User promoted to ${newRole}`);
+            fetchUsers();
+        } catch (err) {
+            console.error('Error updating role:', err);
+            toast.error(`Update failed: ${err.response?.data?.message || err.message}`);
+        }
+    };
+
     const handleDelete = async (id) => {
         toast.info('Processing deletion...', { autoClose: 1000 });
         try {
@@ -234,15 +248,26 @@ const AdminStaff = () => {
                                                 {user.role || 'staff'}
                                             </span>
                                         </td>
-                                        <td className="p-4 text-right">
+                                        <td className="p-4 text-right flex justify-end gap-2">
                                             {user.username !== admin.username && (
-                                                <button
-                                                    onClick={() => handleDelete(user._id)}
-                                                    className="text-red-500 hover:text-red-700 p-2 rounded-full hover:bg-red-50 transition"
-                                                    title="Delete"
-                                                >
-                                                    <FaTrash />
-                                                </button>
+                                                <>
+                                                    {user.role !== 'admin' && (
+                                                        <button
+                                                            onClick={() => handleRoleUpdate(user._id, 'admin')}
+                                                            className="text-purple-600 hover:text-purple-800 p-2 rounded-full hover:bg-purple-100 transition text-xs font-bold border border-purple-200"
+                                                            title="Promote to Admin"
+                                                        >
+                                                            Make Admin
+                                                        </button>
+                                                    )}
+                                                    <button
+                                                        onClick={() => handleDelete(user._id)}
+                                                        className="text-red-500 hover:text-red-700 p-2 rounded-full hover:bg-red-50 transition"
+                                                        title="Delete"
+                                                    >
+                                                        <FaTrash />
+                                                    </button>
+                                                </>
                                             )}
                                         </td>
                                     </tr>

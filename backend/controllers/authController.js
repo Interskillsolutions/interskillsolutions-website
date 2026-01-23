@@ -18,6 +18,10 @@ exports.loginAdmin = async (req, res) => {
                 _id: admin._id,
                 username: admin.username,
                 role: admin.role,
+                fullName: admin.fullName,
+                email: admin.email,
+                phone: admin.phone,
+                branch: admin.branch,
                 token: generateToken(admin._id),
             });
         } else {
@@ -61,6 +65,16 @@ exports.getUsers = async (req, res) => {
     }
 };
 
+exports.getStaffList = async (req, res) => {
+    try {
+        // Return minimal info for all staff/admins
+        const users = await Admin.find({}).select('_id username fullName role branch profileImage');
+        res.json(users);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 exports.deleteUser = async (req, res) => {
     try {
         const user = await Admin.findById(req.params.id);
@@ -76,13 +90,21 @@ exports.deleteUser = async (req, res) => {
 };
 
 exports.registerStaff = async (req, res) => {
-    const { username, password } = req.body;
+    const { username, password, fullName, email, phone, branch } = req.body;
     try {
         const userExists = await Admin.findOne({ username });
         if (userExists) {
             return res.status(400).json({ message: 'User already exists' });
         }
-        const user = await Admin.create({ username, password, role: 'staff' });
+        const user = await Admin.create({
+            username,
+            password,
+            role: 'staff',
+            fullName,
+            email,
+            phone,
+            branch
+        });
         if (user) {
             res.status(201).json({
                 _id: user._id,
@@ -91,6 +113,56 @@ exports.registerStaff = async (req, res) => {
             });
         } else {
             res.status(400).json({ message: 'Invalid user data' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+exports.updateProfile = async (req, res) => {
+    try {
+        const user = await Admin.findById(req.admin._id);
+
+        if (user) {
+            user.fullName = req.body.fullName || user.fullName;
+            user.email = req.body.email || user.email;
+            user.phone = req.body.phone || user.phone;
+            user.branch = req.body.branch || user.branch;
+
+            if (req.body.password) {
+                user.password = req.body.password;
+            }
+
+            const updatedUser = await user.save();
+
+            res.json({
+                _id: updatedUser._id,
+                username: updatedUser.username,
+                role: updatedUser.role,
+                fullName: updatedUser.fullName,
+                email: updatedUser.email,
+                phone: updatedUser.phone,
+                branch: updatedUser.branch,
+                token: generateToken(updatedUser._id),
+            });
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+exports.updateUserRole = async (req, res) => {
+    try {
+        const user = await Admin.findById(req.params.id);
+
+        if (user) {
+            user.role = req.body.role || user.role;
+            await user.save();
+            res.json({ message: 'User role updated' });
+        } else {
+            res.status(404).json({ message: 'User not found' });
         }
     } catch (error) {
         res.status(500).json({ message: error.message });

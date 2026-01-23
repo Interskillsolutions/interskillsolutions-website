@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import API_URL from '../config';
 import { toast } from 'react-toastify';
-import { FaTrash, FaCheck, FaEye, FaUndo, FaTimes } from 'react-icons/fa';
+import { FaTrash, FaCheck, FaEye, FaUndo, FaTimes, FaHistory } from 'react-icons/fa';
 import AuthContext from '../context/AuthContext';
 import * as XLSX from 'xlsx';
 
@@ -16,6 +16,8 @@ const AdminLeads = () => {
     const [showRemarkModal, setShowRemarkModal] = useState(false);
     const [selectedLeadId, setSelectedLeadId] = useState(null);
     const [remarkText, setRemarkText] = useState('');
+    const [showHistoryModal, setShowHistoryModal] = useState(false);
+    const [selectedHistoryLead, setSelectedHistoryLead] = useState(null);
 
     useEffect(() => {
         if (admin) {
@@ -179,6 +181,20 @@ const AdminLeads = () => {
                                                         <FaCheck />
                                                     </button>
                                                     <button
+                                                        onClick={() => { setSelectedHistoryLead(lead); setShowHistoryModal(true); }}
+                                                        className="bg-purple-500 text-white p-2 rounded hover:bg-purple-600"
+                                                        title="View History"
+                                                    >
+                                                        <FaHistory />
+                                                    </button>
+                                                    <button
+                                                        onClick={() => { setSelectedHistoryLead(lead); setShowHistoryModal(true); }}
+                                                        className="bg-purple-500 text-white p-2 rounded hover:bg-purple-600"
+                                                        title="View History"
+                                                    >
+                                                        <FaHistory />
+                                                    </button>
+                                                    <button
                                                         onClick={() => handleDelete(lead._id, false)}
                                                         className="bg-red-500 text-white p-2 rounded hover:bg-red-600"
                                                         title="Delete (Trash)"
@@ -235,6 +251,43 @@ const AdminLeads = () => {
                                 disabled={!remarkText.trim()}
                             >
                                 Submit Remark
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* History Modal */}
+            {showHistoryModal && selectedHistoryLead && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                    <div className="bg-white p-6 rounded-lg w-full max-w-lg shadow-xl max-h-[80vh] flex flex-col">
+                        <div className="flex justify-between items-center mb-4">
+                            <h2 className="text-xl font-bold">Lead History</h2>
+                            <button onClick={() => setShowHistoryModal(false)} className="text-gray-500 hover:text-gray-700 font-bold text-xl">&times;</button>
+                        </div>
+                        <div className="overflow-y-auto flex-1 pr-2">
+                            {selectedHistoryLead.remarks && selectedHistoryLead.remarks.length > 0 ? (
+                                <ul className="space-y-4">
+                                    {selectedHistoryLead.remarks.slice().reverse().map((remark, index) => (
+                                        <li key={index} className="bg-gray-50 p-3 rounded border border-gray-200">
+                                            <div className="flex justify-between items-start mb-1">
+                                                <span className="font-bold text-blue-600 text-sm">{remark.name || 'Unknown Staff'}</span>
+                                                <span className="text-xs text-gray-500">{new Date(remark.date).toLocaleString()}</span>
+                                            </div>
+                                            <p className="text-gray-700 text-sm whitespace-pre-wrap">{remark.text}</p>
+                                        </li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <p className="text-gray-500 text-center py-4">No history available for this lead.</p>
+                            )}
+                        </div>
+                        <div className="mt-4 pt-4 border-t border-gray-100 text-right">
+                            <button
+                                onClick={() => setShowHistoryModal(false)}
+                                className="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300"
+                            >
+                                Close
                             </button>
                         </div>
                     </div>

@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { FaTachometerAlt, FaUsers, FaSignOutAlt, FaStar, FaBook, FaChartLine, FaEnvelopeOpenText, FaLayerGroup } from 'react-icons/fa';
+import { FaTachometerAlt, FaUsers, FaSignOutAlt, FaStar, FaBook, FaChartLine, FaEnvelopeOpenText, FaLayerGroup, FaComments, FaUserCircle } from 'react-icons/fa';
 import { useContext } from 'react';
 import AuthContext from '../context/AuthContext';
 
@@ -45,6 +45,9 @@ const AdminSidebar = () => {
                 <NavLink to="/admin/leads" className={linkClasses}>
                     <FaEnvelopeOpenText className="mr-3" /> Leads
                 </NavLink>
+                <NavLink to="/admin/chat" className={linkClasses}>
+                    <FaComments className="mr-3" /> Team Connect
+                </NavLink>
 
 
 
@@ -62,6 +65,9 @@ const AdminSidebar = () => {
             >
                 <FaSignOutAlt className="mr-3" /> Logout
             </button>
+            <NavLink to="/admin/profile" className={`flex items-center p-3 mt-auto text-sm text-gray-400 hover:text-white transition-colors justify-center`}>
+                <FaUserCircle className="mr-2" /> My Profile
+            </NavLink>
         </div >
     );
 };

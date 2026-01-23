@@ -16,6 +16,11 @@ const adminSchema = new mongoose.Schema({
         enum: ['admin', 'staff'],
         default: 'staff',
     },
+    fullName: { type: String },
+    email: { type: String },
+    phone: { type: String },
+    branch: { type: String },
+    profileImage: { type: String },
 });
 
 adminSchema.pre('save', async function () {

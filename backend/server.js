@@ -33,6 +33,7 @@ const reviewRoutes = require('./routes/reviewRoutes');
 const partnerRoutes = require('./routes/partnerRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const requestRoutes = require('./routes/requestRoutes');
+const messageRoutes = require('./routes/messageRoutes');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/courses', courseRoutes);
@@ -42,11 +43,71 @@ app.use('/api/reviews', reviewRoutes);
 app.use('/api/partners', partnerRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/requests', requestRoutes);
+app.use('/api/messages', messageRoutes);
 
 app.get('/', (req, res) => {
     res.send('API is running...');
 });
 
-app.listen(PORT, () => {
+const http = require('http');
+const { Server } = require("socket.io");
+const Message = require('./models/Message');
+
+const server = http.createServer(app);
+const io = new Server(server, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"]
+    }
+});
+
+io.on('connection', (socket) => {
+    console.log('User connected:', socket.id);
+
+    socket.on('join_chat', () => {
+        socket.join('team_connect'); // General Chat Room
+        console.log(`User ${socket.id} joined General Chat`);
+    });
+
+    // Join Private Room (User ID)
+    socket.on('join_user_room', (userId) => {
+        socket.join(userId);
+        console.log(`User ${socket.id} joined Private Room: ${userId}`);
+    });
+
+    socket.on('send_message', async (data) => {
+        // Data: sender (id), senderName, content, recipient (optional)
+        if (data.sender && data.content) {
+            try {
+                const newMessage = await Message.create({
+                    sender: data.sender,
+                    senderName: data.senderName,
+                    content: data.content,
+                    recipient: data.recipient || null
+                });
+
+                if (data.recipient) {
+                    // Send to Recipient AND Sender (so it appears in their UI too)
+                    io.to(data.recipient).emit('receive_message', newMessage);
+                    io.to(data.sender).emit('receive_message', newMessage);
+                } else {
+                    // General Chat: Send to everyone in 'team_connect'
+                    io.to('team_connect').emit('receive_message', newMessage);
+                }
+            } catch (err) {
+                console.error('Error saving message:', err);
+            }
+        }
+    });
+
+    socket.on('disconnect', () => {
+        console.log('User disconnected', socket.id);
+    });
+});
+
+// Make io accessible to routes if needed
+app.set('socketio', io);
+
+server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

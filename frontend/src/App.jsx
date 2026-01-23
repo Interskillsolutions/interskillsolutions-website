@@ -9,6 +9,8 @@ import Contact from './pages/Contact';
 import { AuthProvider } from './context/AuthContext';
 import AdminLogin from './pages/AdminLogin';
 import StaffRegister from './pages/StaffRegister';
+import StaffProfile from './pages/StaffProfile';
+import TeamConnect from './pages/TeamConnect';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminLeads from './pages/AdminLeads';
 import AdminReviews from './pages/AdminReviews';
@@ -37,6 +39,8 @@ function App() {
           <Route path="/staff-portal/register" element={<StaffRegister />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
+            <Route path="profile" element={<StaffProfile />} />
+            <Route path="chat" element={<TeamConnect />} />
             <Route path="dashboard" element={<AdminDashboard />} />
             <Route path="leads" element={<AdminLeads />} />
             <Route path="reviews" element={<AdminReviews />} />
