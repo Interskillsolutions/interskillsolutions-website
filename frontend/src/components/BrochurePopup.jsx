@@ -4,7 +4,7 @@ import API_URL from '../config';
 import { toast } from 'react-toastify';
 import { FaTimes } from 'react-icons/fa';
 
-const BrochurePopup = ({ isOpen, onClose, brochureUrl }) => {
+const BrochurePopup = ({ isOpen, onClose, brochureUrl, title = "Download Brochure", submitText = "Download Now" }) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -21,12 +21,11 @@ const BrochurePopup = ({ isOpen, onClose, brochureUrl }) => {
         try {
             await axios.post(`${API_URL}/api/leads`, {
                 ...formData,
-                source: 'Brochure Download',
+                source: title, // Use title as source e.g. "Request a Call Back" or "Download Brochure"
             });
-            toast.success('Brochure downloading...');
-            onClose();
 
             if (brochureUrl) {
+                toast.success('Brochure downloading...');
                 // Trigger download for dynamic brochure
                 const link = document.createElement('a');
                 link.href = brochureUrl;
@@ -36,14 +35,16 @@ const BrochurePopup = ({ isOpen, onClose, brochureUrl }) => {
                 link.click();
                 document.body.removeChild(link);
             } else {
-                // Fallback if no specific brochure uploaded
-                toast.info('Brochure not available for this course yet.');
+                toast.success('Request submitted successfully!');
             }
+            onClose();
 
         } catch (error) {
             toast.error('Something went wrong. Please try again.');
         }
     };
+
+
 
     if (!isOpen) return null;
 

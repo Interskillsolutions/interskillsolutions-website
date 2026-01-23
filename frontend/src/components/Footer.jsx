@@ -110,8 +110,9 @@ const Footer = () => {
                 animate={{ scale: 1 }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                href="https://wa.me/919876543210"
-                className="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-colors z-50 flex items-center justify-center"
+                href="https://wa.me/919819461050"
+                className="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-colors z-50 flex items-center justify-center font-bold"
+                title="Chat with Priya Gawade"
                 target="_blank"
                 rel="noopener noreferrer"
             >

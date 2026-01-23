@@ -14,7 +14,8 @@ const CourseDetail = () => {
     const [course, setCourse] = useState(null);
     const [loading, setLoading] = useState(true);
     const [activeModule, setActiveModule] = useState(null);
-    const [isBrochureOpen, setIsBrochureOpen] = useState(false);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [popupType, setPopupType] = useState('brochure'); // 'brochure' or 'callback'
 
     useEffect(() => {
         const fetchCourse = async () => {
@@ -102,11 +103,11 @@ const CourseDetail = () => {
                         </div>
 
                         <div className="flex gap-4">
-                            <button className="bg-accent text-gray-900 px-8 py-3.5 rounded-lg font-bold hover:bg-yellow-400 transition-all shadow-lg hover:shadow-yellow-500/20 transform hover:-translate-y-1">
+                            <button onClick={() => { setPopupType('callback'); setIsPopupOpen(true); }} className="bg-accent text-gray-900 px-8 py-3.5 rounded-lg font-bold hover:bg-yellow-400 transition-all shadow-lg hover:shadow-yellow-500/20 transform hover:-translate-y-1">
                                 Enroll Now
                             </button>
                             <button
-                                onClick={() => setIsBrochureOpen(true)}
+                                onClick={() => { setPopupType('brochure'); setIsPopupOpen(true); }}
                                 className="flex items-center px-6 py-3.5 rounded-lg font-semibold border border-gray-500 hover:bg-white/10 transition-colors backdrop-blur-sm"
                             >
                                 <FaDownload className="mr-2" /> Syllabus
@@ -238,7 +239,10 @@ const CourseDetail = () => {
                         <div className="bg-gray-900 text-white p-6 rounded-2xl shadow-lg">
                             <h3 className="text-xl font-bold mb-4">Have Questions?</h3>
                             <p className="text-gray-300 text-sm mb-6">Our career counselors are here to help you choose the right path.</p>
-                            <button className="w-full bg-transparent border border-gray-600 text-white py-3 rounded-xl font-semibold hover:bg-gray-800 transition-colors">
+                            <button
+                                onClick={() => { setPopupType('callback'); setIsPopupOpen(true); }}
+                                className="w-full bg-transparent border border-gray-600 text-white py-3 rounded-xl font-semibold hover:bg-gray-800 transition-colors"
+                            >
                                 Request Call Back
                             </button>
                         </div>
@@ -246,16 +250,19 @@ const CourseDetail = () => {
                 </div>
 
             </div>
+
             <BrochurePopup
-                isOpen={isBrochureOpen}
-                onClose={() => setIsBrochureOpen(false)}
+                isOpen={isPopupOpen}
+                onClose={() => setIsPopupOpen(false)}
+                title={popupType === 'brochure' ? "Download Syllabus" : "Request a Call Back"}
+                submitText={popupType === 'brochure' ? "Download Now" : "Submit Request"}
                 brochureUrl={
-                    course.brochure
+                    popupType === 'brochure' && course.brochure
                         ? (course.brochure.startsWith('http') ? course.brochure : `${API_URL}${course.brochure}`)
                         : null
                 }
             />
-        </div>
+        </div >
     );
 };
 

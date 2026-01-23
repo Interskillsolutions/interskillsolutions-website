@@ -139,7 +139,7 @@ const Hero = () => {
                                     type="tel"
                                     name="phone"
                                     pattern="[0-9]{10}"
-                                    placeholder="9876543210"
+                                    placeholder="9819461050"
                                     value={formData.phone}
                                     onChange={handleChange}
                                     required
