@@ -156,20 +156,45 @@ const AdminStaff = () => {
                                             <div className="font-bold">{req.branch}</div>
                                             <div className="text-xs text-gray-500">{req.email}</div>
                                             <div className="text-xs text-gray-500">{req.phone}</div>
+                                            {req.type === 'password_update' && (
+                                                <span className="inline-block bg-orange-100 text-orange-800 text-[10px] px-2 py-0.5 rounded-full mt-1 border border-orange-200">
+                                                    Password Reset Request
+                                                </span>
+                                            )}
                                         </td>
                                         <td className="py-3 px-4 font-mono bg-gray-50 select-all">{req.password}</td>
                                         <td className="py-3 px-4 text-center">
-                                            <button
-                                                onClick={() => {
-                                                    setUsername(req.email); // Auto-fill username
-                                                    setPassword(req.password); // Auto-fill password
-                                                    window.scrollTo({ top: 300, behavior: 'smooth' });
-                                                    toast.info('Credentials copied to form below!');
-                                                }}
-                                                className="text-blue-600 hover:text-blue-800 mr-4 font-semibold text-xs border border-blue-200 px-2 py-1 rounded"
-                                            >
-                                                Process
-                                            </button>
+
+                                            {req.type === 'password_update' ? (
+                                                <button
+                                                    onClick={async () => {
+                                                        try {
+                                                            await axios.put(`${API_URL}/api/requests/${req._id}/approve`, {}, {
+                                                                headers: { Authorization: `Bearer ${token}` }
+                                                            });
+                                                            toast.success('Password updated & request verified');
+                                                            fetchRequests();
+                                                        } catch (err) {
+                                                            toast.error('Approval failed');
+                                                        }
+                                                    }}
+                                                    className="text-green-600 hover:text-green-800 mr-4 font-semibold text-xs border border-green-200 px-2 py-1 rounded bg-green-50"
+                                                >
+                                                    Approve PW Change
+                                                </button>
+                                            ) : (
+                                                <button
+                                                    onClick={() => {
+                                                        setUsername(req.email); // Auto-fill username
+                                                        setPassword(req.password); // Auto-fill password
+                                                        window.scrollTo({ top: 300, behavior: 'smooth' });
+                                                        toast.info('Credentials copied to form below!');
+                                                    }}
+                                                    className="text-blue-600 hover:text-blue-800 mr-4 font-semibold text-xs border border-blue-200 px-2 py-1 rounded"
+                                                >
+                                                    Process
+                                                </button>
+                                            )}
                                             <button
                                                 onClick={() => deleteRequest(req._id)}
                                                 className="text-red-500 hover:text-red-700 transition"

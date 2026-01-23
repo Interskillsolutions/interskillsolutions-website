@@ -1,4 +1,5 @@
 const Admin = require('../models/Admin');
+const StaffRequest = require('../models/StaffRequest');
 const jwt = require('jsonwebtoken');
 
 const generateToken = (id) => {
@@ -130,7 +131,35 @@ exports.updateProfile = async (req, res) => {
             user.branch = req.body.branch || user.branch;
 
             if (req.body.password) {
-                user.password = req.body.password;
+                if (user.role === 'admin') {
+                    user.password = req.body.password;
+                } else {
+                    // Create Password Update Request
+                    await StaffRequest.create({
+                        fullName: user.fullName || user.username,
+                        email: user.email,
+                        phone: user.phone,
+                        branch: user.branch || 'HO',
+                        password: req.body.password,
+                        type: 'password_update',
+                        userId: user._id
+                    });
+
+                    // Respond early (don't save password to user yet)
+                    await user.save(); // Save other changes (profile info)
+
+                    return res.json({
+                        _id: user._id,
+                        username: user.username,
+                        role: user.role,
+                        fullName: user.fullName,
+                        email: user.email,
+                        phone: user.phone,
+                        branch: user.branch,
+                        token: generateToken(user._id),
+                        message: 'Password change request sent to Admin for approval.'
+                    });
+                }
             }
 
             const updatedUser = await user.save();

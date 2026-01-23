@@ -55,8 +55,41 @@ const deleteRequest = async (req, res) => {
     }
 };
 
+// @desc    Approve a request (Password Update)
+// @route   PUT /api/requests/:id/approve
+// @access  Private/Admin
+const approveRequest = async (req, res) => {
+    try {
+        const request = await StaffRequest.findById(req.params.id);
+        if (!request) {
+            return res.status(404).json({ message: 'Request not found' });
+        }
+
+        if (request.type === 'password_update' && request.userId) {
+            const Admin = require('../models/Admin'); // Lazy load to avoid circular dependency if any
+            const user = await Admin.findById(request.userId);
+            if (user) {
+                user.password = request.password; // Will be hashed by pre-save
+                await user.save();
+                await request.deleteOne();
+                return res.json({ message: 'Password updated successfully' });
+            } else {
+                return res.status(404).json({ message: 'User not found' });
+            }
+        } else {
+            // For registration requests, we might still want manual "Process" via form, 
+            // OR we can automate it here too. For now let's just handle password update automation.
+            return res.status(400).json({ message: 'Cannot auto-approve this request type' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server Error' });
+    }
+};
+
 module.exports = {
     createRequest,
     getRequests,
-    deleteRequest
+    deleteRequest,
+    approveRequest
 };

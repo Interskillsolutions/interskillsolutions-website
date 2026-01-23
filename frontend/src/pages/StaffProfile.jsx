@@ -39,6 +39,11 @@ const StaffProfile = () => {
             return toast.error("Passwords do not match");
         }
 
+        if (formData.password && user.role !== 'admin') {
+            const confirm = window.confirm("Password changes require Admin approval. Do you want to submit a request?");
+            if (!confirm) return;
+        }
+
         try {
             const config = {
                 headers: {
@@ -61,7 +66,11 @@ const StaffProfile = () => {
 
             // Update local storage and context
             // We need to keep the token, so we merge the response with existing token if response doesn't have it (though backend sends it)
-            toast.success("Profile Updated Successfully");
+            if (data.message) {
+                toast.info(data.message);
+            } else {
+                toast.success("Profile Updated Successfully");
+            }
             login(data); // Update context with new user data
 
         } catch (error) {

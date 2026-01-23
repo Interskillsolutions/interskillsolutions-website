@@ -18,13 +18,23 @@ const staffRequestSchema = mongoose.Schema({
         required: true
     },
     password: {
-        type: String, // Storing raw as per requirement "admin will see exact password"
+        type: String,
         required: true
     },
     status: {
         type: String,
         enum: ['Pending', 'Approved', 'Rejected'],
         default: 'Pending'
+    },
+    type: {
+        type: String,
+        enum: ['registration', 'password_update'],
+        default: 'registration'
+    },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Admin',
+        required: false
     }
 }, {
     timestamps: true

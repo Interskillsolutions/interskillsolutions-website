@@ -17,7 +17,9 @@ const AdminSidebar = () => {
 
     return (
         <div className="w-64 bg-gray-800 text-white min-h-screen p-4 flex flex-col">
-            <h2 className="text-2xl font-bold mb-8 text-center text-primary">Admin Panel</h2>
+            <h2 className="text-2xl font-bold mb-8 text-center text-primary">
+                {admin?.role === 'admin' ? 'Admin Panel' : 'Staff Panel'}
+            </h2>
             <nav className="space-y-2 flex-1">
                 <NavLink to="/admin/dashboard" className={linkClasses}>
                     <FaTachometerAlt className="mr-3" /> Dashboard
@@ -50,6 +52,9 @@ const AdminSidebar = () => {
                 </NavLink>
 
 
+                <NavLink to="/admin/profile" className={linkClasses}>
+                    <FaUserCircle className="mr-3" /> My Profile
+                </NavLink>
 
                 {admin && admin.role === 'admin' && (
                     <NavLink to="/admin/users" className={linkClasses}>
@@ -65,9 +70,7 @@ const AdminSidebar = () => {
             >
                 <FaSignOutAlt className="mr-3" /> Logout
             </button>
-            <NavLink to="/admin/profile" className={`flex items-center p-3 mt-auto text-sm text-gray-400 hover:text-white transition-colors justify-center`}>
-                <FaUserCircle className="mr-2" /> My Profile
-            </NavLink>
+
         </div >
     );
 };
