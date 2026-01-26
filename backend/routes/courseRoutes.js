@@ -6,14 +6,14 @@ const {
     updateCourse,
     deleteCourse,
 } = require('../controllers/courseController');
-const { protect, admin } = require('../middleware/authMiddleware');
+const { protect, admin, staff } = require('../middleware/authMiddleware');
 const router = express.Router();
 
-router.route('/').get(getCourses).post(protect, admin, createCourse);
+router.route('/').get(getCourses).post(protect, staff, createCourse);
 router
     .route('/:id')
     .get(getCourseById)
-    .put(protect, admin, updateCourse)
-    .delete(protect, admin, deleteCourse);
+    .put(protect, staff, updateCourse)
+    .delete(protect, staff, deleteCourse);
 
 module.exports = router;
