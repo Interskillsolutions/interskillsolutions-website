@@ -33,10 +33,10 @@ const Counter = ({ value, label }) => {
 
 const StatsWidget = () => {
     const stats = [
-        { label: 'Placed Students', value: '5000+' },
-        { label: 'Alumni Network', value: '500+' },
-        { label: 'Industry Trainers', value: '10+' },
-        { label: 'Years Experience', value: '18+' },
+        { label: 'Placed Students', value: '12000+' },
+        { label: 'Alumni Network', value: '1500+' },
+        { label: 'Industry Expert Trainers', value: '30+' },
+        { label: 'Years Experience', value: '25+' },
     ];
 
     return (

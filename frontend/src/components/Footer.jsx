@@ -58,25 +58,30 @@ const Footer = () => {
                         <div className="flex items-start">
                             <span className="mr-3 mt-1 text-lg">📍</span>
                             <div>
-                                <p className="font-semibold text-white mb-1">Thane:</p>
-                                <p>505, 5th floor, Paradise Tower, Station Rd, above MCDonald's, Naupada, Thane West, Thane 400602</p>
+                                <p className="font-semibold text-white mb-1">Thane Branch:</p>
+                                <p>505, 5th floor, Paradise Tower, Station Rd, Thane West 400602</p>
+                                <a href="tel:9819461050" className="text-gray-400 hover:text-white transition-colors block mt-1">
+                                    📞 +91 98194 61050
+                                </a>
                             </div>
                         </div>
                         <div className="flex items-start">
                             <span className="mr-3 mt-1 text-lg">📍</span>
                             <div>
-                                <p className="font-semibold text-white mb-1">Andheri:</p>
-                                <p>Office No.14, Ground Floor Opp. Moti Mehel Restaurant S.V. Road, Near Andheri Railway Station, Andheri West 400058</p>
+                                <p className="font-semibold text-white mb-1">Andheri Branch:</p>
+                                <p>Office No.14, Ground Floor, S.V. Road, Andheri West 400058</p>
+                                <a href="tel:9136264656" className="text-gray-400 hover:text-white transition-colors block mt-1">
+                                    📞 +91 91362 64656
+                                </a>
                             </div>
                         </div>
-                        <a href="mailto:interskillsolution@gmail.com" className="flex items-center hover:text-white transition-colors">
+                        <div className="flex items-center hover:text-white transition-colors mt-3">
                             <span className="mr-3 text-lg">📧</span>
-                            Interskillsolution@gmail.com
-                        </a>
-                        <a href="tel:9819461050" className="flex items-center hover:text-white transition-colors">
-                            <span className="mr-3 text-lg">📞</span>
-                            9819461050
-                        </a>
+                            <div>
+                                <a href="mailto:info@interskillsolutions.com" className="block hover:text-accent">info@interskillsolutions.com</a>
+                                <a href="mailto:placements@interskillsolutions.com" className="block hover:text-accent">placements@interskillsolutions.com</a>
+                            </div>
+                        </div>
                     </div>
                 </motion.div>
 

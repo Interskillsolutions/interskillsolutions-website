@@ -71,9 +71,18 @@ const Contact = () => {
                                 <div className="bg-indigo-100 p-3 rounded-full text-indigo-600">
                                     <FaPhone className="text-xl" />
                                 </div>
-                                <div>
+                                <div className="w-full">
                                     <h3 className="font-semibold text-gray-800">Phone</h3>
-                                    <a href="tel:9819461050" className="block text-gray-600 hover:text-indigo-600 transition-colors">9819461050</a>
+                                    <div className="flex flex-col sm:flex-row sm:justify-between w-full pr-4">
+                                        <div>
+                                            <span className="text-sm text-gray-500 block">Thane Branch:</span>
+                                            <a href="tel:9819461050" className="block text-gray-600 hover:text-indigo-600 transition-colors font-medium">98194 61050</a>
+                                        </div>
+                                        <div className="mt-2 sm:mt-0">
+                                            <span className="text-sm text-gray-500 block">Andheri Branch:</span>
+                                            <a href="tel:9136264656" className="block text-gray-600 hover:text-indigo-600 transition-colors font-medium">91362 64656</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -83,7 +92,8 @@ const Contact = () => {
                                 </div>
                                 <div>
                                     <h3 className="font-semibold text-gray-800">Email</h3>
-                                    <a href="mailto:Interskillssolution@gmail.com" className="block text-gray-600 hover:text-purple-600 transition-colors">Interskillssolution@gmail.com</a>
+                                    <a href="mailto:info@interskillsolutions.com" className="block text-gray-600 hover:text-purple-600 transition-colors">info@interskillsolutions.com</a>
+                                    <a href="mailto:placements@interskillsolutions.com" className="block text-gray-600 hover:text-purple-600 transition-colors">placements@interskillsolutions.com</a>
                                 </div>
                             </div>
 
@@ -93,10 +103,10 @@ const Contact = () => {
                                 </div>
                                 <div>
                                     <h3 className="font-semibold text-gray-800 mb-1">Thane Location</h3>
-                                    <p className="text-gray-600 text-sm mb-3">505, 5th floor, Paradise Tower, Station Rd, above MCDonald's, Naupada, Thane West, Thane 400602</p>
+                                    <p className="text-gray-600 text-sm mb-3">505, 5th floor, Paradise Tower, Station Rd, Naupada, Thane West 400602</p>
 
                                     <h3 className="font-semibold text-gray-800 mb-1">Andheri Location</h3>
-                                    <p className="text-gray-600 text-sm">Office No.14, Ground Floor Opp. Moti Mehel Restaurant S.V. Road, Near Andheri Railway Station, Andheri West 400058</p>
+                                    <p className="text-gray-600 text-sm">Office No.14, Ground Floor, S.V. Road, Andheri West 400058</p>
                                 </div>
                             </div>
                         </div>
@@ -134,7 +144,7 @@ const Contact = () => {
                                         value={formData.name}
                                         onChange={handleChange}
                                         className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 outline-none transition-all"
-                                        placeholder="John Doe"
+                                        placeholder="Amit Singh"
                                         required
                                     />
                                 </div>
@@ -147,7 +157,7 @@ const Contact = () => {
                                         value={formData.email}
                                         onChange={handleChange}
                                         className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 outline-none transition-all"
-                                        placeholder="john@example.com"
+                                        placeholder="amit.singh@example.com"
                                         required
                                     />
                                 </div>

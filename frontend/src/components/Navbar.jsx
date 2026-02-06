@@ -16,6 +16,7 @@ const Navbar = () => {
     // Dynamic Course Data
     const [courses, setCourses] = useState([]);
     const [categories, setCategories] = useState({});
+    const [activeCategory, setActiveCategory] = useState(null);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -65,6 +66,9 @@ const Navbar = () => {
             });
 
             setCategories(orderedCategories);
+            if (Object.keys(orderedCategories).length > 0) {
+                setActiveCategory(Object.keys(orderedCategories)[0]);
+            }
         } catch (error) {
             console.error("Failed to fetch data for navbar", error);
         }
@@ -110,48 +114,83 @@ const Navbar = () => {
                                 className="flex items-center text-gray-300 hover:text-white focus:outline-none transition-colors py-2"
                                 onMouseEnter={() => setDropdownOpen(true)}
                             >
-                                Courses <FaChevronDown className="ml-1 text-xs" />
+                                Services <FaChevronDown className="ml-1 text-xs" />
                             </button>
 
-                            {/* Desktop Dropdown */}
-                            <div className="absolute left-0 mt-0 w-72 bg-white border border-gray-100 rounded-xl shadow-2xl py-2 invisible opacity-0 group-hover/dropdown:visible group-hover/dropdown:opacity-100 transition-all duration-300 transform origin-top-left z-50">
-                                {Object.keys(categories).length === 0 ? (
-                                    <div className="px-4 py-2 text-gray-500 text-sm">Loading courses...</div>
-                                ) : (
-                                    Object.entries(categories).map(([category, catCourses]) => (
-                                        <div key={category} className="group/item relative">
-                                            <button className="w-full text-left px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-primary transition-colors flex justify-between items-center group-hover/item:bg-blue-50 group-hover/item:text-primary">
-                                                <span className="flex items-center gap-3 font-medium">
-                                                    <FaGraduationCap className="text-gray-400 group-hover/item:text-primary transition-colors" />
-                                                    {category}
-                                                </span>
-                                                <FaChevronRight className="text-xs text-gray-400 group-hover/item:text-primary transition-colors" />
-                                            </button>
 
-                                            {/* Nested Sub-menu */}
-                                            <div className="absolute left-full top-0 w-72 bg-white border border-gray-100 rounded-xl shadow-2xl py-2 invisible opacity-0 group-hover/item:visible group-hover/item:opacity-100 transition-all duration-200 -ml-2">
-                                                <div className="px-4 py-2 border-b border-gray-50 mb-1">
-                                                    <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">{category} Courses</span>
-                                                </div>
-                                                {catCourses.map(course => (
-                                                    <Link
-                                                        key={course._id}
-                                                        to={`/courses/${course._id}`}
-                                                        className="block px-4 py-2.5 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 flex items-center gap-3 transition-colors"
-                                                    >
-                                                        <FaBook className="text-blue-200 group-hover:text-primary transition-colors text-xs" />
-                                                        {course.title}
-                                                    </Link>
-                                                ))}
+                            {/* Compact Mega Menu V4 */}
+                            <div className="absolute left-1/2 transform -translate-x-1/2 top-full mt-2 w-[600px] bg-white rounded-xl shadow-xl border border-gray-100 invisible opacity-0 group-hover/dropdown:visible group-hover/dropdown:opacity-100 transition-all duration-200 origin-top z-50 overflow-hidden">
+                                {Object.keys(categories).length === 0 ? (
+                                    <div className="p-6 text-center text-gray-400 text-sm">Loading...</div>
+                                ) : (
+                                    <div className="flex bg-white min-h-[300px]">
+                                        {/* Sidebar - Categories */}
+                                        <div className="w-[35%] bg-gray-50/80 border-r border-gray-100 py-3">
+                                            {Object.keys(categories).map((category) => (
+                                                <button
+                                                    key={category}
+                                                    onMouseEnter={() => setActiveCategory(category)}
+                                                    className={`w-full text-left px-5 py-2.5 text-[13px] font-semibold flex items-center justify-between transition-colors ${activeCategory === category
+                                                        ? 'text-primary bg-white shadow-sm border-r-2 border-primary'
+                                                        : 'text-gray-500 hover:text-gray-800 hover:bg-gray-100'
+                                                        }`}
+                                                >
+                                                    {category}
+                                                    {activeCategory === category && <FaChevronRight className="text-[10px] text-primary" />}
+                                                </button>
+                                            ))}
+                                            <div className="mt-2 px-5 pt-3 border-t border-gray-100">
+                                                <Link to="/courses" className="text-[11px] font-bold text-gray-400 hover:text-primary uppercase tracking-wider flex items-center gap-1">
+                                                    View All Services <FaChevronRight className="text-[9px]" />
+                                                </Link>
                                             </div>
                                         </div>
-                                    ))
+
+                                        {/* Content - Compact Course Grid */}
+                                        <div className="w-[65%] p-5 bg-white">
+                                            <AnimatePresence mode='wait'>
+                                                {activeCategory && categories[activeCategory] && (
+                                                    <motion.div
+                                                        key={activeCategory}
+                                                        initial={{ opacity: 0 }}
+                                                        animate={{ opacity: 1 }}
+                                                        exit={{ opacity: 0 }}
+                                                        transition={{ duration: 0.15 }}
+                                                    >
+                                                        <div className="mb-4 pb-2 border-b border-gray-50 flex justify-between items-center">
+                                                            <h3 className="text-sm font-bold text-gray-800 tracking-tight">
+                                                                {activeCategory}
+                                                            </h3>
+                                                            <span className="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-medium">
+                                                                {categories[activeCategory].length}
+                                                            </span>
+                                                        </div>
+
+                                                        <div className="grid grid-cols-1 gap-2">
+                                                            {categories[activeCategory].map(course => (
+                                                                <Link
+                                                                    key={course._id}
+                                                                    to={`/courses/${course._id}`}
+                                                                    className="group flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-all border border-transparent hover:border-gray-100"
+                                                                >
+                                                                    <div className="w-8 h-8 rounded-md bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                                                                        <FaBook className="text-xs" />
+                                                                    </div>
+                                                                    <div className="flex-1 min-w-0">
+                                                                        <h4 className="text-[13px] font-medium text-gray-700 group-hover:text-primary truncate transition-colors">
+                                                                            {course.title}
+                                                                        </h4>
+                                                                    </div>
+                                                                    <FaChevronRight className="text-[10px] text-gray-300 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+                                                                </Link>
+                                                            ))}
+                                                        </div>
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
+                                        </div>
+                                    </div>
                                 )}
-                                <div className="border-t border-gray-100 mt-2 pt-2">
-                                    <Link to="/courses" className="block px-4 py-2 text-center text-sm font-semibold text-primary hover:text-blue-700">
-                                        View All Courses →
-                                    </Link>
-                                </div>
                             </div>
                         </div>
 
@@ -193,7 +232,7 @@ const Navbar = () => {
                                 <Link to="/" className="block text-gray-700 hover:text-primary font-medium" onClick={toggleMenu}>Home</Link>
                                 <div>
                                     <button onClick={toggleDropdown} className="flex justify-between w-full text-gray-700 hover:text-primary font-medium">
-                                        Courses <FaChevronDown className={`transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
+                                        Services <FaChevronDown className={`transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
                                     </button>
                                     {dropdownOpen && (
                                         <motion.div
@@ -217,7 +256,7 @@ const Navbar = () => {
                                                     ))}
                                                 </div>
                                             ))}
-                                            <Link to="/courses" className="block text-primary font-bold mt-2 pt-2 border-t" onClick={toggleMenu}>View All Courses</Link>
+                                            <Link to="/courses" className="block text-primary font-bold mt-2 pt-2 border-t" onClick={toggleMenu}>View All Services</Link>
                                         </motion.div>
                                     )}
                                 </div>

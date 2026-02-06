@@ -256,6 +256,7 @@ const CourseDetail = () => {
                 onClose={() => setIsPopupOpen(false)}
                 title={popupType === 'brochure' ? "Download Syllabus" : "Request a Call Back"}
                 submitText={popupType === 'brochure' ? "Download Now" : "Submit Request"}
+                fixedCourse={popupType === 'brochure' ? { title: course.title, brochure: course.brochure } : null}
                 brochureUrl={
                     popupType === 'brochure' && course.brochure
                         ? (course.brochure.startsWith('http') ? course.brochure : `${API_URL}${course.brochure}`)

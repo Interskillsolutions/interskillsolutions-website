@@ -128,6 +128,11 @@ const TeamConnect = () => {
                 const { data } = await axios.get(url, config);
                 setMessages(data);
                 scrollToBottom();
+
+                // Mark as Read if DM
+                if (activeChat !== 'general') {
+                    await axios.put(`${ENDPOINT}/api/messages/mark-read`, { senderId: activeChat }, config);
+                }
             } catch (error) {
                 console.error("Error fetching messages:", error);
             }

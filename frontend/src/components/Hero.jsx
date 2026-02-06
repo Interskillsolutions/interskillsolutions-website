@@ -115,7 +115,7 @@ const Hero = () => {
                                 <input
                                     type="text"
                                     name="name"
-                                    placeholder="John Doe"
+                                    placeholder="Rahul Sharma"
                                     value={formData.name}
                                     onChange={handleChange}
                                     required
@@ -127,7 +127,7 @@ const Hero = () => {
                                 <input
                                     type="email"
                                     name="email"
-                                    placeholder="john@example.com"
+                                    placeholder="rahul.sharma@example.com"
                                     value={formData.email}
                                     onChange={handleChange}
                                     className="w-full px-4 py-3 bg-white/5 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent text-white placeholder-gray-400 transition-all"
@@ -139,7 +139,7 @@ const Hero = () => {
                                     type="tel"
                                     name="phone"
                                     pattern="[0-9]{10}"
-                                    placeholder="9819461050"
+                                    placeholder="98765 43210"
                                     value={formData.phone}
                                     onChange={handleChange}
                                     required

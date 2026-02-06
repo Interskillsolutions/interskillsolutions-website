@@ -19,6 +19,15 @@ const messageSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    recipient: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Admin',
+        default: null // null implies General Chat
+    },
+    read: {
+        type: Boolean,
+        default: false
+    },
     timestamp: {
         type: Date,
         default: Date.now

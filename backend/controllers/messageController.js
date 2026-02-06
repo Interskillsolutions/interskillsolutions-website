@@ -41,3 +41,17 @@ exports.saveMessage = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+exports.markMessagesAsRead = async (req, res) => {
+    try {
+        const { senderId } = req.body;
+        // Mark messages from senderId to current user as read
+        await Message.updateMany(
+            { sender: senderId, recipient: req.admin._id, read: false },
+            { $set: { read: true } }
+        );
+        res.status(200).json({ message: 'Messages marked as read' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
