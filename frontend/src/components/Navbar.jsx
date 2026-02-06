@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
 import API_URL from '../config';
 import BrochurePopup from './BrochurePopup';
-import logoIcon from '../assets/only_logo.jpg';
+import logoIcon from '../assets/interskill_logo.png';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -91,16 +91,16 @@ const Navbar = () => {
             >
                 <div className="container mx-auto px-4 flex justify-between items-center">
                     <Link to="/" className="flex items-center space-x-3 group">
-                        <span className={`font-bold text-white tracking-tight transition-all duration-300 ${scrolled ? 'text-xl' : 'text-2xl'}`}>
-                            InterSkill Solutions
-                        </span>
                         <motion.img
                             whileHover={{ rotate: 360 }}
                             transition={{ duration: 0.8 }}
                             src={logoIcon}
                             alt="InterSkill Solutions"
-                            className={`transition-all duration-300 ${scrolled ? 'h-10' : 'h-12'}`}
+                            className={`transition-all duration-300 ${scrolled ? 'h-10 w-10' : 'h-12 w-12'}`}
                         />
+                        <span className={`font-bold text-white tracking-tight transition-all duration-300 ${scrolled ? 'text-xl' : 'text-2xl'}`}>
+                            InterSkill Solutions
+                        </span>
                     </Link>
 
                     {/* Desktop Menu */}

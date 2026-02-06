@@ -3,7 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { motion } from 'framer-motion';
 import API_URL from '../config';
-import heroBanner from '../assets/hero_banner_interskill.png';
+import heroBanner from '../assets/hero_bg_premium.png';
 
 const Hero = () => {
     const [formData, setFormData] = useState({
@@ -42,7 +42,7 @@ const Hero = () => {
             />
 
             {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-black/50 z-0"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-950/95 via-blue-900/80 to-black/60 z-0"></div>
 
             <div className="container mx-auto px-4 flex flex-col md:flex-row items-center relative z-10 pt-20">
                 <div className="md:w-1/2 mb-10 md:mb-0 text-white">

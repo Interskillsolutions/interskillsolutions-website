@@ -3,7 +3,7 @@ import axios from 'axios';
 import API_URL from '../config';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import logo from '../assets/logo_icon.png';
+import logo from '../assets/interskill_logo.png';
 
 const StaffRegister = () => {
     const [formData, setFormData] = useState({
@@ -56,7 +56,7 @@ const StaffRegister = () => {
             <ToastContainer />
             <div className="bg-white p-8 rounded-xl shadow-lg max-w-lg w-full">
                 <div className="text-center mb-8">
-                    <img src={logo} alt="InterSkill Solutions" className="h-16 mx-auto mb-4" />
+                    <img src={logo} alt="InterSkill Solutions" className="h-20 w-auto object-contain mx-auto mb-4" />
                     <h1 className="text-2xl font-bold text-primary">Staff Registration Portal</h1>
                     <p className="text-gray-500 mt-2">Submit your details for account creation.</p>
                 </div>

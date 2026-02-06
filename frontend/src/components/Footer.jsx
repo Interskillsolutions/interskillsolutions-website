@@ -1,6 +1,6 @@
 import { FaFacebook, FaInstagram, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import logoBlue from '../assets/logo_blue_cropped.png';
+import logoBlue from '../assets/interskill_logo.png';
 
 const Footer = () => {
     const footerVariants = {
@@ -22,7 +22,7 @@ const Footer = () => {
                 className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12"
             >
                 <motion.div variants={footerVariants}>
-                    <img src={logoBlue} alt="InterSkill Solutions" className="h-20 mb-6 rounded-lg bg-white p-2" />
+                    <img src={logoBlue} alt="InterSkill Solutions" className="h-20 w-20 object-contain mb-6" />
                     <p className="text-gray-400 leading-relaxed">
                         Bridging the gap between industry expectations and aspiring professionals with expert training and mentorship.
                     </p>
