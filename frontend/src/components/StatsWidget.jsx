@@ -35,7 +35,7 @@ const StatsWidget = () => {
     const stats = [
         { label: 'Placed Students', value: '12000+' },
         { label: 'Alumni Network', value: '1500+' },
-        { label: 'Industry Expert Trainers', value: '30+' },
+        { label: 'Industry Expert Trainers', value: '100+' },
         { label: 'Years Experience', value: '25+' },
     ];
 
