@@ -4,6 +4,26 @@ import { motion } from 'framer-motion';
 import { FaQuoteLeft, FaStar, FaUserCircle } from 'react-icons/fa';
 import API_URL from '../config';
 
+const ReadMoreLess = ({ text, limit }) => {
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    const toggleReadMore = () => {
+        setIsExpanded(!isExpanded);
+    };
+
+    return (
+        <span>
+            "{isExpanded ? text : text.substring(0, limit) + '...'}"
+            <button
+                onClick={toggleReadMore}
+                className="text-blue-500 hover:text-blue-700 font-semibold ml-2 focus:outline-none"
+            >
+                {isExpanded ? 'Read Less' : 'Read More'}
+            </button>
+        </span>
+    );
+};
+
 const Testimonials = () => {
     const [reviews, setReviews] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -56,9 +76,13 @@ const Testimonials = () => {
                             <FaQuoteLeft className="text-4xl text-blue-100 absolute top-6 left-6 -z-0" />
 
                             <div className="relative z-10">
-                                <p className="text-gray-600 mb-6 leading-relaxed italic">
-                                    "{review.review.length > 200 ? review.review.substring(0, 200) + '...' : review.review}"
-                                </p>
+                                <div className="text-gray-600 mb-6 leading-relaxed italic">
+                                    {review.review.length > 200 ? (
+                                        <ReadMoreLess text={review.review} limit={200} />
+                                    ) : (
+                                        review.review
+                                    )}
+                                </div>
 
                                 <div className="flex items-center gap-4 border-t pt-6 border-gray-100">
                                     {review.image ? (

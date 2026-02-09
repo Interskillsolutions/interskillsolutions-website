@@ -149,7 +149,7 @@ const AdminPartners = () => {
                                             <td className="p-4">
                                                 <div className="w-16 h-16 flex items-center justify-center bg-gray-100 rounded borber border-gray-200">
                                                     <img
-                                                        src={`${API_URL}${partner.logo}`}
+                                                        src={partner.logo.startsWith('http') ? partner.logo : `${API_URL}${partner.logo}`}
                                                         alt={partner.name}
                                                         className="max-w-full max-h-full object-contain p-1"
                                                     />

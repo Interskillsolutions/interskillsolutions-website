@@ -5,36 +5,11 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
-// Configure Multer for image upload
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        const uploadPath = 'uploads/partners/';
-        // Ensure directory exists
-        if (!fs.existsSync(uploadPath)) {
-            fs.mkdirSync(uploadPath, { recursive: true });
-        }
-        cb(null, uploadPath);
-    },
-    filename: (req, file, cb) => {
-        cb(null, 'partner-' + Date.now() + path.extname(file.originalname));
-    }
-});
+const { createCloudinaryStorage } = require('../config/cloudinary');
+const { cloudinary } = require('../config/cloudinary');
 
-const upload = multer({
-    storage: storage,
-    limits: { fileSize: 2 * 1024 * 1024 }, // 2MB limit
-    fileFilter: (req, file, cb) => {
-        const filetypes = /jpeg|jpg|png|webp|svg/;
-        const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-        const mimetype = filetypes.test(file.mimetype);
-
-        if (mimetype && extname) {
-            return cb(null, true);
-        } else {
-            cb(new Error('Images Only!'));
-        }
-    }
-});
+const storage = createCloudinaryStorage('interskills-partners');
+const upload = multer({ storage });
 
 const { protect } = require('../middleware/authMiddleware');
 
@@ -62,7 +37,7 @@ router.post('/', protect, upload.single('logo'), async (req, res) => {
 
         const newPartner = new Partner({
             name: req.body.name,
-            logo: `/uploads/partners/${req.file.filename}`
+            logo: req.file.path
         });
 
         const partner = await newPartner.save();
@@ -84,10 +59,10 @@ router.delete('/:id', protect, async (req, res) => {
             return res.status(404).json({ msg: 'Partner not found' });
         }
 
-        // Delete image file
-        const imagePath = path.join(__dirname, '..', partner.logo);
-        if (fs.existsSync(imagePath)) {
-            fs.unlinkSync(imagePath);
+        // Delete image from Cloudinary
+        if (partner.logo) {
+            const publicId = partner.logo.split('/').pop().split('.')[0];
+            await cloudinary.uploader.destroy(`interskills-partners/${publicId}`);
         }
 
         await partner.deleteOne();

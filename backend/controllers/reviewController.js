@@ -20,7 +20,7 @@ const getReviews = async (req, res) => {
 // @route   POST /api/reviews
 // @access  Private (Admin)
 const createReview = async (req, res) => {
-    const { name, role, review, rating, image } = req.body;
+    const { name, role, review, rating, imageUrl } = req.body;
 
     if (!name || !review) {
         return res.status(400).json({ message: 'Name and review text are required' });
@@ -36,7 +36,7 @@ const createReview = async (req, res) => {
             role,
             review,
             rating,
-            image,
+            image: req.file ? req.file.path : imageUrl,
             order: newOrder
         });
         res.status(201).json(newReview);
@@ -76,6 +76,13 @@ const deleteReview = async (req, res) => {
 
         if (!review) {
             return res.status(404).json({ message: 'Review not found' });
+        }
+
+        // Delete image from Cloudinary if it exists
+        if (review.image && review.image.includes('cloudinary')) {
+            const publicId = review.image.split('/').pop().split('.')[0];
+            const { cloudinary } = require('../config/cloudinary');
+            await cloudinary.uploader.destroy(`interskills-reviews/${publicId}`);
         }
 
         await review.deleteOne();

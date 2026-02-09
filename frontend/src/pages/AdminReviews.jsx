@@ -18,8 +18,13 @@ const AdminReviews = () => {
         role: '',
         review: '',
         rating: 5,
-        image: ''
+        image: null,
+        imageUrl: ''
     });
+
+    const handleFileChange = (e) => {
+        setFormData({ ...formData, image: e.target.files[0] });
+    };
 
     const fetchReviews = async () => {
         try {
@@ -40,7 +45,11 @@ const AdminReviews = () => {
     }, []);
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        if (e.target.name === 'image') {
+            setFormData({ ...formData, image: e.target.files[0] });
+        } else {
+            setFormData({ ...formData, [e.target.name]: e.target.value });
+        }
     };
 
     const handleDelete = async (id) => {
@@ -59,11 +68,29 @@ const AdminReviews = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const config = { headers: { Authorization: `Bearer ${admin.token}` } };
-            await axios.post(`${API_URL}/api/reviews`, formData, config);
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${admin.token}`,
+                    'Content-Type': 'multipart/form-data'
+                }
+            };
+
+            const formDataToSend = new FormData();
+            formDataToSend.append('name', formData.name);
+            formDataToSend.append('role', formData.role);
+            formDataToSend.append('review', formData.review);
+            formDataToSend.append('rating', formData.rating);
+            if (formData.image) {
+                formDataToSend.append('image', formData.image);
+            }
+            if (formData.imageUrl) {
+                formDataToSend.append('imageUrl', formData.imageUrl);
+            }
+
+            await axios.post(`${API_URL}/api/reviews`, formDataToSend, config);
             toast.success('Review added successfully');
             setIsModalOpen(false);
-            setFormData({ name: '', role: '', review: '', rating: 5, image: '' });
+            setFormData({ name: '', role: '', review: '', rating: 5, image: null, imageUrl: '' });
             fetchReviews();
         } catch (error) {
             toast.error(error.response?.data?.message || 'Failed to add review');
@@ -222,11 +249,21 @@ const AdminReviews = () => {
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Image URL (Optional)</label>
                                 <input
                                     type="text"
-                                    name="image"
-                                    value={formData.image}
+                                    name="imageUrl"
+                                    value={formData.imageUrl}
                                     onChange={handleChange}
-                                    placeholder="https://..."
+                                    placeholder="https://example.com/image.jpg"
                                     className="w-full border rounded-lg p-2 focus:ring-2 focus:ring-primary outline-none"
+                                />
+                            </div>
+                            <div className="text-center text-gray-400 text-sm my-2">- OR -</div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Upload Profile Image</label>
+                                <input
+                                    type="file"
+                                    onChange={handleFileChange}
+                                    className="w-full border rounded-lg p-2 focus:ring-2 focus:ring-primary outline-none"
+                                    accept="image/*"
                                 />
                             </div>
                             <div className="flex gap-4 mt-6">
