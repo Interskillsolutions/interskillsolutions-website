@@ -8,10 +8,8 @@ import { toast } from 'react-toastify';
 
 const AdminPartners = () => {
     const { token } = useContext(AuthContext);
-    const [partners, setPartners] = useState([]);
-    const [loading, setLoading] = useState(true);
     const [name, setName] = useState('');
-    const [website, setWebsite] = useState('');
+    const [logoUrl, setLogoUrl] = useState('');
     const [file, setFile] = useState(null);
     const [submitting, setSubmitting] = useState(false);
 
@@ -37,15 +35,15 @@ const AdminPartners = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!name || !file) {
-            toast.error('Please provide both name and logo');
+        if (!name || (!file && !logoUrl)) {
+            toast.error('Please provide name and either a logo file or URL');
             return;
         }
 
         const formData = new FormData();
         formData.append('name', name);
-        formData.append('website', website);
-        formData.append('logo', file);
+        if (logoUrl) formData.append('logoUrl', logoUrl);
+        if (file) formData.append('logo', file);
 
         setSubmitting(true);
 
@@ -58,7 +56,7 @@ const AdminPartners = () => {
             });
             toast.success('Partner added successfully');
             setName('');
-            setWebsite('');
+            setLogoUrl('');
             setFile(null);
             // Reset file input
             document.getElementById('fileInput').value = '';
@@ -108,13 +106,13 @@ const AdminPartners = () => {
                             />
                         </div>
                         <div className="flex-1 w-full">
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Website Link (Optional)</label>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Logo URL (Optional)</label>
                             <input
-                                type="url"
-                                value={website}
-                                onChange={(e) => setWebsite(e.target.value)}
+                                type="text"
+                                value={logoUrl}
+                                onChange={(e) => setLogoUrl(e.target.value)}
                                 className="w-full p-2 border rounded focus:ring-2 focus:ring-primary outline-none"
-                                placeholder="https://example.com"
+                                placeholder="https://example.com/logo.png"
                             />
                         </div>
                         <div className="flex-1 w-full">

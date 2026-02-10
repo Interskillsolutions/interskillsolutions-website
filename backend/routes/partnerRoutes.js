@@ -31,14 +31,16 @@ router.get('/', async (req, res) => {
 // @access  Private
 router.post('/', protect, upload.single('logo'), async (req, res) => {
     try {
-        if (!req.file) {
-            return res.status(400).json({ msg: 'Please upload a logo image' });
+        const { name, website, logoUrl } = req.body;
+
+        if (!req.file && !logoUrl) {
+            return res.status(400).json({ msg: 'Please upload a logo image or provide a URL' });
         }
 
         const newPartner = new Partner({
-            name: req.body.name,
-            website: req.body.website,
-            logo: req.file.path
+            name,
+            website,
+            logo: req.file ? req.file.path : logoUrl
         });
 
         const partner = await newPartner.save();
