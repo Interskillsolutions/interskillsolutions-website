@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
-import { FaQuoteLeft, FaStar, FaUserCircle } from 'react-icons/fa';
+import { FaQuoteLeft, FaStar, FaUserCircle, FaLinkedin } from 'react-icons/fa';
 import API_URL from '../config';
 
 const ReadMoreLess = ({ text, limit }) => {
@@ -94,7 +94,14 @@ const Testimonials = () => {
                                     )}
 
                                     <div>
-                                        <h4 className="font-bold text-gray-800">{review.name}</h4>
+                                        <div className="flex items-center gap-2">
+                                            <h4 className="font-bold text-gray-800">{review.name}</h4>
+                                            {review.socialLink && (
+                                                <a href={review.socialLink} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 transition-colors">
+                                                    <FaLinkedin />
+                                                </a>
+                                            )}
+                                        </div>
                                         <p className="text-sm text-gray-500">{review.role}</p>
                                     </div>
 

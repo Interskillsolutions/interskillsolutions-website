@@ -49,16 +49,20 @@ const PlacementPartners = () => {
                     }}
                 >
                     {MARQUEE_ITEMS.map((partner, index) => (
-                        <div
+                        <a
                             key={`${partner._id}-${index}`}
-                            className="flex-shrink-0 flex items-center justify-center min-w-[180px] h-24 bg-gray-50 rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-blue-100 transition-all duration-300 group cursor-default p-4"
+                            href={partner.website || '#'}
+                            target={partner.website ? "_blank" : "_self"}
+                            rel="noopener noreferrer"
+                            className={`flex-shrink-0 flex items-center justify-center min-w-[180px] h-24 bg-gray-50 rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-blue-100 transition-all duration-300 group ${partner.website ? 'cursor-pointer' : 'cursor-default'} p-4 block`}
+                            onClick={(e) => !partner.website && e.preventDefault()}
                         >
                             <img
                                 src={partner.logo.startsWith('http') ? partner.logo : `${API_URL}${partner.logo}`}
                                 alt={partner.name}
                                 className="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300 opacity-70 group-hover:opacity-100"
                             />
-                        </div>
+                        </a>
                     ))}
                 </motion.div>
             </div>

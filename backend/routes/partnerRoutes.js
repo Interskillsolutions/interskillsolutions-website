@@ -37,6 +37,7 @@ router.post('/', protect, upload.single('logo'), async (req, res) => {
 
         const newPartner = new Partner({
             name: req.body.name,
+            website: req.body.website,
             logo: req.file.path
         });
 

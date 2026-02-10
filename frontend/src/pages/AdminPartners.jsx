@@ -11,6 +11,7 @@ const AdminPartners = () => {
     const [partners, setPartners] = useState([]);
     const [loading, setLoading] = useState(true);
     const [name, setName] = useState('');
+    const [website, setWebsite] = useState('');
     const [file, setFile] = useState(null);
     const [submitting, setSubmitting] = useState(false);
 
@@ -43,6 +44,7 @@ const AdminPartners = () => {
 
         const formData = new FormData();
         formData.append('name', name);
+        formData.append('website', website);
         formData.append('logo', file);
 
         setSubmitting(true);
@@ -56,6 +58,7 @@ const AdminPartners = () => {
             });
             toast.success('Partner added successfully');
             setName('');
+            setWebsite('');
             setFile(null);
             // Reset file input
             document.getElementById('fileInput').value = '';
@@ -102,6 +105,16 @@ const AdminPartners = () => {
                                 onChange={(e) => setName(e.target.value)}
                                 className="w-full p-2 border rounded focus:ring-2 focus:ring-primary outline-none"
                                 placeholder="e.g. Interskill Solutions"
+                            />
+                        </div>
+                        <div className="flex-1 w-full">
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Website Link (Optional)</label>
+                            <input
+                                type="url"
+                                value={website}
+                                onChange={(e) => setWebsite(e.target.value)}
+                                className="w-full p-2 border rounded focus:ring-2 focus:ring-primary outline-none"
+                                placeholder="https://example.com"
                             />
                         </div>
                         <div className="flex-1 w-full">

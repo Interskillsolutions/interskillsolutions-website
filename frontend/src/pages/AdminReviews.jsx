@@ -256,6 +256,17 @@ const AdminReviews = () => {
                                     className="w-full border rounded-lg p-2 focus:ring-2 focus:ring-primary outline-none"
                                 />
                             </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">LinkedIn/Profile Link (Optional)</label>
+                                <input
+                                    type="url"
+                                    name="socialLink"
+                                    value={formData.socialLink || ''}
+                                    onChange={handleChange}
+                                    placeholder="https://linkedin.com/in/..."
+                                    className="w-full border rounded-lg p-2 focus:ring-2 focus:ring-primary outline-none"
+                                />
+                            </div>
                             <div className="text-center text-gray-400 text-sm my-2">- OR -</div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Upload Profile Image</label>

@@ -24,6 +24,10 @@ const reviewSchema = new mongoose.Schema({
         type: String, // URL to image (can be a placeholder or uploaded url)
         default: ''
     },
+    socialLink: {
+        type: String, // URL to student's profile (e.g., LinkedIn)
+        default: ''
+    },
     order: {
         type: Number,
         default: 0

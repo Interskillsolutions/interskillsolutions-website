@@ -20,7 +20,7 @@ const getReviews = async (req, res) => {
 // @route   POST /api/reviews
 // @access  Private (Admin)
 const createReview = async (req, res) => {
-    const { name, role, review, rating, imageUrl } = req.body;
+    const { name, role, review, rating, imageUrl, socialLink } = req.body;
 
     if (!name || !review) {
         return res.status(400).json({ message: 'Name and review text are required' });
@@ -37,6 +37,7 @@ const createReview = async (req, res) => {
             review,
             rating,
             image: req.file ? req.file.path : imageUrl,
+            socialLink,
             order: newOrder
         });
         res.status(201).json(newReview);

@@ -10,6 +10,10 @@ const PartnerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    website: {
+        type: String, // URL of the company/partner website
+        default: ''
+    },
     createdAt: {
         type: Date,
         default: Date.now
