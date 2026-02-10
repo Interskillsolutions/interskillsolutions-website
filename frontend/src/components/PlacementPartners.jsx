@@ -58,7 +58,7 @@ const PlacementPartners = () => {
                             onClick={(e) => !partner.website && e.preventDefault()}
                         >
                             <img
-                                src={partner.logo.startsWith('http') ? partner.logo : `${API_URL}${partner.logo}`}
+                                src={partner.logo && partner.logo.startsWith('http') ? partner.logo : `${API_URL}${partner.logo}`}
                                 alt={partner.name}
                                 className="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300 opacity-70 group-hover:opacity-100"
                             />
