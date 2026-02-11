@@ -8,6 +8,8 @@ import { toast } from 'react-toastify';
 
 const AdminPartners = () => {
     const { token } = useContext(AuthContext);
+    const [partners, setPartners] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [name, setName] = useState('');
     const [logoUrl, setLogoUrl] = useState('');
     const [file, setFile] = useState(null);
