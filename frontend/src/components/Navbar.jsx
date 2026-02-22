@@ -200,6 +200,9 @@ const Navbar = () => {
                         <motion.div whileHover="hover" variants={navLinkVariants}>
                             <Link to="/contact" className="text-gray-300 hover:text-white transition-colors">Contact</Link>
                         </motion.div>
+                        <motion.div whileHover="hover" variants={navLinkVariants}>
+                            <Link to="/gallery" className="text-gray-300 hover:text-white transition-colors">Gallery</Link>
+                        </motion.div>
 
                         <motion.button
                             whileHover={{ scale: 1.05 }}
@@ -262,6 +265,7 @@ const Navbar = () => {
                                 </div>
                                 <Link to="/about" className="block text-gray-700 hover:text-primary font-medium" onClick={toggleMenu}>About Us</Link>
                                 <Link to="/contact" className="block text-gray-700 hover:text-primary font-medium" onClick={toggleMenu}>Contact</Link>
+                                <Link to="/gallery" className="block text-gray-700 hover:text-primary font-medium" onClick={toggleMenu}>Gallery</Link>
                                 <button
                                     onClick={() => { setIsBrochureOpen(true); toggleMenu(); }}
                                     className="w-full bg-primary text-white py-3 rounded-lg shadow hover:bg-blue-700 transition-colors font-semibold"

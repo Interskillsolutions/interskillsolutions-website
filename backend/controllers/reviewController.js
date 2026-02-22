@@ -93,9 +93,52 @@ const deleteReview = async (req, res) => {
     }
 };
 
+// @desc    Update a review
+// @route   PUT /api/reviews/:id
+// @access  Private (Admin)
+const updateReview = async (req, res) => {
+    try {
+        const review = await Review.findById(req.params.id);
+
+        if (!review) {
+            return res.status(404).json({ message: 'Review not found' });
+        }
+
+        const { name, role, review: reviewText, rating, imageUrl, socialLink } = req.body;
+
+        // If a new image is uploaded, handle Cloudinary replacement
+        if (req.file) {
+            if (review.image && review.image.includes('cloudinary')) {
+                const publicId = review.image.split('/').pop().split('.')[0];
+                try {
+                    const { cloudinary } = require('../config/cloudinary');
+                    await cloudinary.uploader.destroy(`interskills-reviews/${publicId}`);
+                } catch (cloudinaryError) {
+                    console.error('Error deleting old image from Cloudinary:', cloudinaryError);
+                }
+            }
+            review.image = req.file.path;
+        } else if (imageUrl) {
+            review.image = imageUrl;
+        }
+
+        review.name = name || review.name;
+        review.role = role || review.role;
+        review.review = reviewText || review.review;
+        review.rating = rating || review.rating;
+        review.socialLink = socialLink || review.socialLink;
+
+        const updatedReview = await review.save();
+        res.status(200).json(updatedReview);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
 module.exports = {
     getReviews,
     createReview,
     updateReviewOrder,
+    updateReview,
     deleteReview
 };

@@ -21,6 +21,9 @@ import AdminCourses from './pages/AdminCourses';
 import AdminCourseForm from './pages/AdminCourseForm';
 import Courses from './pages/Courses';
 import CourseDetail from './pages/CourseDetail';
+import GalleryPage from './pages/GalleryPage';
+import GalleryDetail from './pages/GalleryDetail';
+import AdminGallery from './pages/AdminGallery';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -34,6 +37,8 @@ function App() {
           <Route path="/contact" element={<Layout><Contact /></Layout>} />
           <Route path="/courses" element={<Layout><Courses /></Layout>} />
           <Route path="/courses/:id" element={<Layout><CourseDetail /></Layout>} />
+          <Route path="/gallery" element={<Layout><GalleryPage /></Layout>} />
+          <Route path="/gallery/:id" element={<Layout><GalleryDetail /></Layout>} />
 
           {/* Admin Routes */}
           <Route path="/staff-portal/register" element={<StaffRegister />} />
@@ -45,6 +50,7 @@ function App() {
             <Route path="leads" element={<AdminLeads />} />
             <Route path="reviews" element={<AdminReviews />} />
             <Route path="partners" element={<AdminPartners />} />
+            <Route path="gallery" element={<AdminGallery />} />
             <Route path="categories" element={<AdminCategories />} />
             <Route path="users" element={<AdminStaff />} />
             <Route path="courses" element={<AdminCourses />} />

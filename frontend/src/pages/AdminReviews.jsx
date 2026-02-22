@@ -3,7 +3,7 @@ import AuthContext from '../context/AuthContext';
 import axios from 'axios';
 import API_URL from '../config';
 import { toast } from 'react-toastify';
-import { FaTrash, FaPlus, FaStar, FaSave, FaGripVertical } from 'react-icons/fa';
+import { FaTrash, FaPlus, FaStar, FaSave, FaGripVertical, FaEdit } from 'react-icons/fa';
 import { Reorder } from 'framer-motion';
 
 const AdminReviews = () => {
@@ -11,6 +11,8 @@ const AdminReviews = () => {
     const [loading, setLoading] = useState(true);
     const { admin } = useContext(AuthContext); // Use context instead of localStorage
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
+    const [editId, setEditId] = useState(null);
 
     // Form State
     const [formData, setFormData] = useState({
@@ -52,6 +54,21 @@ const AdminReviews = () => {
         }
     };
 
+    const handleEdit = (review) => {
+        setFormData({
+            name: review.name,
+            role: review.role || '',
+            review: review.review,
+            rating: review.rating,
+            image: null,
+            imageUrl: review.image || '',
+            socialLink: review.socialLink || ''
+        });
+        setEditId(review._id);
+        setIsEditing(true);
+        setIsModalOpen(true);
+    };
+
     const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this review?')) {
             try {
@@ -86,14 +103,25 @@ const AdminReviews = () => {
             if (formData.imageUrl) {
                 formDataToSend.append('imageUrl', formData.imageUrl);
             }
+            if (formData.socialLink) {
+                formDataToSend.append('socialLink', formData.socialLink);
+            }
 
-            await axios.post(`${API_URL}/api/reviews`, formDataToSend, config);
-            toast.success('Review added successfully');
+            if (isEditing) {
+                await axios.put(`${API_URL}/api/reviews/${editId}`, formDataToSend, config);
+                toast.success('Review updated successfully');
+            } else {
+                await axios.post(`${API_URL}/api/reviews`, formDataToSend, config);
+                toast.success('Review added successfully');
+            }
+
             setIsModalOpen(false);
-            setFormData({ name: '', role: '', review: '', rating: 5, image: null, imageUrl: '' });
+            setIsEditing(false);
+            setEditId(null);
+            setFormData({ name: '', role: '', review: '', rating: 5, image: null, imageUrl: '', socialLink: '' });
             fetchReviews();
         } catch (error) {
-            toast.error(error.response?.data?.message || 'Failed to add review');
+            toast.error(error.response?.data?.message || `Failed to ${isEditing ? 'update' : 'add'} review`);
         }
     };
 
@@ -133,7 +161,12 @@ const AdminReviews = () => {
                         </button>
                     )}
                     <button
-                        onClick={() => setIsModalOpen(true)}
+                        onClick={() => {
+                            setIsEditing(false);
+                            setEditId(null);
+                            setFormData({ name: '', role: '', review: '', rating: 5, image: null, imageUrl: '', socialLink: '' });
+                            setIsModalOpen(true);
+                        }}
                         className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
                     >
                         <FaPlus /> Add Review
@@ -179,8 +212,15 @@ const AdminReviews = () => {
                                 </div>
 
                                 <button
+                                    onClick={() => handleEdit(review)}
+                                    className="text-blue-500 hover:bg-blue-50 p-2 rounded-lg transition ml-4"
+                                    title="Edit Review"
+                                >
+                                    <FaEdit />
+                                </button>
+                                <button
                                     onClick={() => handleDelete(review._id)}
-                                    className="text-red-500 hover:bg-red-50 p-2 rounded-lg transition ml-4"
+                                    className="text-red-500 hover:bg-red-50 p-2 rounded-lg transition ml-1"
                                     title="Delete Review"
                                 >
                                     <FaTrash />
@@ -194,8 +234,8 @@ const AdminReviews = () => {
             {/* Add Review Modal */}
             {isModalOpen && (
                 <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-                    <div className="bg-white p-8 rounded-2xl w-full max-w-md shadow-2xl">
-                        <h2 className="text-xl font-bold mb-6">Add New Review</h2>
+                    <div className="bg-white p-8 rounded-2xl w-full max-w-md shadow-2xl max-h-[90vh] overflow-y-auto">
+                        <h2 className="text-xl font-bold mb-6">{isEditing ? 'Edit Review' : 'Add New Review'}</h2>
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
@@ -289,7 +329,7 @@ const AdminReviews = () => {
                                     type="submit"
                                     className="flex-1 bg-primary text-white py-2 rounded-lg font-semibold hover:bg-blue-700 shadow-lg"
                                 >
-                                    Save Review
+                                    {isEditing ? 'Update Review' : 'Save Review'}
                                 </button>
                             </div>
                         </form>

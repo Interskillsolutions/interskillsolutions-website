@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { FaTachometerAlt, FaUsers, FaSignOutAlt, FaStar, FaBook, FaChartLine, FaEnvelopeOpenText, FaLayerGroup, FaComments, FaUserCircle } from 'react-icons/fa';
+import { FaTachometerAlt, FaUsers, FaSignOutAlt, FaStar, FaBook, FaChartLine, FaEnvelopeOpenText, FaLayerGroup, FaComments, FaUserCircle, FaImages } from 'react-icons/fa';
 import { useContext } from 'react';
 import AuthContext from '../context/AuthContext';
 
@@ -39,6 +39,9 @@ const AdminSidebar = () => {
                 </NavLink>
                 <NavLink to="/admin/partners" className={linkClasses}>
                     <FaUsers className="mr-3" /> Partners
+                </NavLink>
+                <NavLink to="/admin/gallery" className={linkClasses}>
+                    <FaImages className="mr-3" /> Manage Gallery
                 </NavLink>
 
                 <div className="pt-4 border-t border-gray-700 my-2"></div>

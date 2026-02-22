@@ -34,6 +34,7 @@ const partnerRoutes = require('./routes/partnerRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const requestRoutes = require('./routes/requestRoutes');
 const messageRoutes = require('./routes/messageRoutes');
+const galleryRoutes = require('./routes/galleryRoutes');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/courses', courseRoutes);
@@ -44,6 +45,7 @@ app.use('/api/partners', partnerRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/requests', requestRoutes);
 app.use('/api/messages', messageRoutes);
+app.use('/api/gallery', galleryRoutes);
 
 app.get('/', (req, res) => {
     res.send('API is running...');

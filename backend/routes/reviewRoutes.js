@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getReviews, createReview, updateReviewOrder, deleteReview } = require('../controllers/reviewController');
+const { getReviews, createReview, updateReviewOrder, updateReview, deleteReview } = require('../controllers/reviewController');
 const { protect, admin, staff } = require('../middleware/authMiddleware');
 
 const multer = require('multer');
@@ -12,6 +12,7 @@ const upload = multer({ storage });
 router.get('/', getReviews);
 router.post('/', protect, staff, upload.single('image'), createReview);
 router.put('/order', protect, staff, updateReviewOrder);
+router.put('/:id', protect, staff, upload.single('image'), updateReview);
 router.delete('/:id', protect, staff, deleteReview);
 
 module.exports = router;
