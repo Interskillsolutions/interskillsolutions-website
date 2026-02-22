@@ -42,7 +42,7 @@ const GallerySection = () => {
                     </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <div className="flex flex-wrap justify-center gap-8 mb-12">
                     {items.map((item, index) => (
                         <motion.div
                             key={item._id}
@@ -51,7 +51,7 @@ const GallerySection = () => {
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
                             whileHover={{ y: -10 }}
-                            className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 group"
+                            className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 group"
                         >
                             <div className="relative h-64 overflow-hidden">
                                 <img

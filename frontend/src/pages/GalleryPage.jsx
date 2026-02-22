@@ -42,14 +42,14 @@ const GalleryPage = () => {
     };
 
     return (
-        <div className="pt-24 pb-20 min-h-screen bg-gray-50">
+        <div className="pt-20 pb-20 min-h-screen bg-gray-50">
             {/* Hero Section */}
-            <div className="bg-primary py-16 mb-12">
+            <div className="bg-gradient-to-br from-primary to-blue-900 py-20 mb-12">
                 <div className="container mx-auto px-4 text-center">
                     <motion.h1
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-4xl md:text-5xl font-bold text-white mb-4"
+                        className="text-4xl md:text-6xl font-black text-white mb-6 uppercase tracking-tight"
                     >
                         Our Gallery
                     </motion.h1>
@@ -57,7 +57,7 @@ const GalleryPage = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.2 }}
-                        className="text-blue-100 max-w-2xl mx-auto text-lg"
+                        className="text-white/80 max-w-2xl mx-auto text-lg md:text-xl font-medium leading-relaxed"
                     >
                         Explore the vibrant life at Interskill Solutions. From tech convocations to hands-on workshops and student success stories.
                     </motion.p>
@@ -74,14 +74,14 @@ const GalleryPage = () => {
                         variants={containerVariants}
                         initial="hidden"
                         animate="visible"
-                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                        className="flex flex-wrap justify-center gap-8"
                     >
                         {items.map((item) => (
                             <motion.div
                                 key={item._id}
                                 variants={itemVariants}
                                 whileHover={{ y: -10 }}
-                                className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 group"
+                                className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 group"
                             >
                                 <div className="relative h-64 overflow-hidden">
                                     <img
