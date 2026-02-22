@@ -163,11 +163,14 @@ const AdminLeads = () => {
                                                 lead.status === 'Completed' ? 'bg-green-100 text-green-900' : 'bg-yellow-100 text-yellow-900'}`}>
                                             <span className="relative">{lead.status}</span>
                                         </span>
+
                                         {lead.remarks && lead.remarks.length > 0 && (
-                                            <div className="mt-2 text-[11px] text-gray-500 italic max-w-xs" title={lead.remarks[lead.remarks.length - 1].text}>
-                                                <p className="truncate line-clamp-1 italic">Last: "{lead.remarks[lead.remarks.length - 1].text}"</p>
-                                                <p className="font-bold text-[10px] mt-0.5 text-blue-700 not-italic uppercase tracking-wider">
-                                                    By {lead.remarks[lead.remarks.length - 1].name} • {new Date(lead.remarks[lead.remarks.length - 1].date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                            <div className="mt-3 p-2 bg-gray-50 rounded border border-gray-100 shadow-sm" title={lead.remarks[lead.remarks.length - 1].text}>
+                                                <p className="text-[11px] font-bold text-gray-800 leading-tight mb-1">
+                                                    "{lead.remarks[lead.remarks.length - 1].text}"
+                                                </p>
+                                                <p className="text-[10px] text-gray-500 font-medium">
+                                                    {lead.remarks[lead.remarks.length - 1].name} • {new Date(lead.remarks[lead.remarks.length - 1].date).toLocaleDateString()} {new Date(lead.remarks[lead.remarks.length - 1].date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                                 </p>
                                             </div>
                                         )}
