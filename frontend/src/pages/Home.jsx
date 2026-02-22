@@ -5,6 +5,7 @@ import PlacementJourney from '../components/PlacementJourney';
 import SkillSection from '../components/SkillSection';
 import PlacementPartners from '../components/PlacementPartners';
 import Testimonials from '../components/Testimonials';
+import GallerySection from '../components/GallerySection';
 
 const Home = () => {
     return (
@@ -15,6 +16,7 @@ const Home = () => {
             <SkillSection />
             <PlacementJourney />
             <PlacementPartners />
+            <GallerySection />
             <Testimonials />
         </div>
     );

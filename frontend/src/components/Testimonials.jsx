@@ -27,6 +27,7 @@ const ReadMoreLess = ({ text, limit }) => {
 const Testimonials = () => {
     const [reviews, setReviews] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [showAll, setShowAll] = useState(false);
 
     useEffect(() => {
         const fetchReviews = async () => {
@@ -42,9 +43,11 @@ const Testimonials = () => {
         fetchReviews();
     }, []);
 
-    if (loading) return null; // Or a subtle skeleton loader
+    if (loading) return null;
 
     if (reviews.length === 0) return null;
+
+    const displayedReviews = showAll ? reviews : reviews.slice(0, 3);
 
     return (
         <section className="py-20 bg-gray-50 overflow-hidden">
@@ -64,7 +67,7 @@ const Testimonials = () => {
 
                 {/* Simplified Grid Layout for Stability - Masonry-like feel */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {reviews.map((review, index) => (
+                    {displayedReviews.map((review, index) => (
                         <motion.div
                             key={review._id}
                             initial={{ opacity: 0, y: 30 }}
@@ -115,6 +118,17 @@ const Testimonials = () => {
                         </motion.div>
                     ))}
                 </div>
+
+                {reviews.length > 3 && (
+                    <div className="mt-12 text-center">
+                        <button
+                            onClick={() => setShowAll(!showAll)}
+                            className="inline-block bg-primary text-white px-8 py-3 rounded-full font-bold hover:bg-blue-700 transition-all shadow-lg"
+                        >
+                            {showAll ? 'Show Less' : 'Show All Reviews'}
+                        </button>
+                    </div>
+                )}
             </div>
         </section>
     );
