@@ -42,9 +42,9 @@ const GalleryPage = () => {
     };
 
     return (
-        <div className="pt-20 pb-20 min-h-screen bg-gray-50">
+        <div className="pb-20 min-h-screen bg-white">
             {/* Hero Section */}
-            <div className="bg-gradient-to-br from-primary to-blue-900 py-20 mb-12">
+            <div className="bg-gradient-to-br from-primary to-blue-900 pt-32 pb-20 mb-12">
                 <div className="container mx-auto px-4 text-center">
                     <motion.h1
                         initial={{ opacity: 0, y: -20 }}
