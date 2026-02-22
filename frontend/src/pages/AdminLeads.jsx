@@ -164,8 +164,11 @@ const AdminLeads = () => {
                                             <span className="relative">{lead.status}</span>
                                         </span>
                                         {lead.remarks && lead.remarks.length > 0 && (
-                                            <div className="mt-2 text-xs text-gray-500 italic max-w-xs truncate" title={lead.remarks[lead.remarks.length - 1].text}>
-                                                Last: "{lead.remarks[lead.remarks.length - 1].text}"
+                                            <div className="mt-2 text-[11px] text-gray-500 italic max-w-xs" title={lead.remarks[lead.remarks.length - 1].text}>
+                                                <p className="truncate line-clamp-1 italic">Last: "{lead.remarks[lead.remarks.length - 1].text}"</p>
+                                                <p className="font-bold text-[10px] mt-0.5 text-blue-700 not-italic uppercase tracking-wider">
+                                                    By {lead.remarks[lead.remarks.length - 1].name} • {new Date(lead.remarks[lead.remarks.length - 1].date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                                </p>
                                             </div>
                                         )}
                                     </td>
