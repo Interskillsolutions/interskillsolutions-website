@@ -82,7 +82,7 @@ const AdminLeads = () => {
 
     const exportToExcel = () => {
         const worksheet = XLSX.utils.json_to_sheet(leads.map(l => ({
-            Date: new Date(l.createdAt).toLocaleDateString(),
+            Date: `${new Date(l.createdAt).toLocaleDateString()} ${new Date(l.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
             Name: l.name,
             Email: l.email,
             Phone: l.phone,
@@ -139,7 +139,12 @@ const AdminLeads = () => {
                             {leads.map((lead) => (
                                 <tr key={lead._id} className="hover:bg-gray-50">
                                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        {new Date(lead.createdAt).toLocaleDateString()}
+                                        <p className="text-gray-900 whitespace-no-wrap">
+                                            {new Date(lead.createdAt).toLocaleDateString()}
+                                        </p>
+                                        <p className="text-gray-500 text-xs">
+                                            {new Date(lead.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                        </p>
                                     </td>
                                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                         <p className="font-semibold text-gray-900">{lead.name}</p>
