@@ -193,13 +193,6 @@ const AdminLeads = () => {
                                                         <FaHistory />
                                                     </button>
                                                     <button
-                                                        onClick={() => { setSelectedHistoryLead(lead); setShowHistoryModal(true); }}
-                                                        className="bg-purple-500 text-white p-2 rounded hover:bg-purple-600"
-                                                        title="View History"
-                                                    >
-                                                        <FaHistory />
-                                                    </button>
-                                                    <button
                                                         onClick={() => handleDelete(lead._id, false)}
                                                         className="bg-red-500 text-white p-2 rounded hover:bg-red-600"
                                                         title="Delete (Trash)"
