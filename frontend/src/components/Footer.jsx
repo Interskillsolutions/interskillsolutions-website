@@ -1,6 +1,6 @@
 import { FaFacebook, FaInstagram, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import logoBlue from '../assets/Templogo.png';
+import logoBlue from '../assets/tempologo.png';
 
 const Footer = () => {
     const footerVariants = {

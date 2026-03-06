@@ -5,7 +5,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import AuthContext from '../context/AuthContext';
 
-import logo from '../assets/Templogo.png';
+import logo from '../assets/tempologo.png';
 
 const AdminLogin = () => {
     const [username, setUsername] = useState('');
