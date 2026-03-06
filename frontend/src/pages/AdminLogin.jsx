@@ -5,7 +5,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import AuthContext from '../context/AuthContext';
 
-import logo from '../assets/interskill_logo.png';
+import logo from '../assets/Templogo.png';
 
 const AdminLogin = () => {
     const [username, setUsername] = useState('');

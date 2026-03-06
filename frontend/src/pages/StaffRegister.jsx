@@ -3,7 +3,7 @@ import axios from 'axios';
 import API_URL from '../config';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import logo from '../assets/interskill_logo.png';
+import logo from '../assets/Templogo.png';
 
 const StaffRegister = () => {
     const [formData, setFormData] = useState({

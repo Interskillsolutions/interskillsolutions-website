@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
 import API_URL from '../config';
 import BrochurePopup from './BrochurePopup';
-import originLogo from '../assets/origin_logo.png';
+import originLogo from '../assets/Templogo.png';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
