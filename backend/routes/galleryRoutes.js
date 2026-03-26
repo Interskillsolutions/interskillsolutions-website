@@ -11,7 +11,7 @@ const { protect, staff } = require('../middleware/authMiddleware');
 const multer = require('multer');
 const { createCloudinaryStorage } = require('../config/cloudinary');
 
-const storage = createCloudinaryStorage('interskills-gallery');
+const storage = createCloudinaryStorage('intersmart-gallery');
 const upload = multer({ storage });
 
 router.get('/', getGalleryItems);

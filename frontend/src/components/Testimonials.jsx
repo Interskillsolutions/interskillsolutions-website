@@ -61,7 +61,7 @@ const Testimonials = () => {
                     <h2 className="text-4xl font-bold text-gray-800 mb-4">Success Stories</h2>
                     <div className="w-24 h-1 bg-accent mx-auto rounded-full mb-4"></div>
                     <p className="text-gray-600 max-w-2xl mx-auto">
-                        Hear from our students who have transformed their careers with Interskill Solutions.
+                        Hear from our students who have transformed their careers with Intersmart Institute of Technology and Management.
                     </p>
                 </motion.div>
 

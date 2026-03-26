@@ -104,7 +104,7 @@ const AdminPartners = () => {
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 className="w-full p-2 border rounded focus:ring-2 focus:ring-primary outline-none"
-                                placeholder="e.g. Interskill Solutions"
+                                placeholder="e.g. Intersmart Institute"
                             />
                         </div>
                         <div className="flex-1 w-full">

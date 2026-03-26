@@ -8,14 +8,14 @@ const reviews = [
     {
         name: "Diwate Yash",
         role: "Full Stack Developer",
-        review: "I joined Interskills Solution for their Full Stack Web Development course, and it exceeded my expectations. Vishakha Ma’am helped me upskill effectively and taught me new techniques, while Priya Ma’am was incredibly supportive throughout the journey, always encouraging me to reach my potential. I learned a lot and highly recommend Interskills Solution to anyone looking to grow in web development or tech.",
+        review: "I joined Intersmart Institute for their Full Stack Web Development course, and it exceeded my expectations. Vishakha Ma’am helped me upskill effectively and taught me new techniques, while Priya Ma’am was incredibly supportive throughout the journey, always encouraging me to reach my potential. I learned a lot and highly recommend Intersmart Institute to anyone looking to grow in web development or tech.",
         rating: 5,
         image: ""
     },
     {
         name: "Prajakta",
         role: "Full Stack Developer",
-        review: "Interskills Solution was a great choice for Full Stack Web Development. Vishakha Ma’am’s practical insights and Priya Ma’am’s constant encouragement helped me grow and excel. The course was engaging and well-structured. Highly recommend it for skill enhancement!",
+        review: "Intersmart Institute was a great choice for Full Stack Web Development. Vishakha Ma’am’s practical insights and Priya Ma’am’s constant encouragement helped me grow and excel. The course was engaging and well-structured. Highly recommend it for skill enhancement!",
         rating: 5,
         image: ""
     },
@@ -36,7 +36,7 @@ const reviews = [
     {
         name: "Mohini Thorat",
         role: "Data Science Intern",
-        review: "The best institute in Mumbai, Maharashtra. And all thanks to Dr Priya mam for the best experience and support I got from her and Interskill solution, through their industry expert trainers who are having 10+ yrs, and hands on US UK projects which helped me to gain top quality industry relevant training. Thus, I got internship within 6 months of training in Data Science with AI, ML.",
+        review: "The best institute in Mumbai, Maharashtra. And all thanks to Dr Priya mam for the best experience and support I got from her and Intersmart Institute, through their industry expert trainers who are having 10+ yrs, and hands on US UK projects which helped me to gain top quality industry relevant training. Thus, I got internship within 6 months of training in Data Science with AI, ML.",
         rating: 5,
         image: ""
     }

@@ -74,7 +74,7 @@ exports.updateGalleryItem = async (req, res) => {
                 // Delete old featured image if it's on cloudinary
                 if (item.featuredImage.includes('cloudinary')) {
                     const publicId = item.featuredImage.split('/').pop().split('.')[0];
-                    await cloudinary.uploader.destroy(`interskills-gallery/${publicId}`).catch(err => console.error(err));
+                    await cloudinary.uploader.destroy(`intersmart-gallery/${publicId}`).catch(err => console.error(err));
                 }
                 item.featuredImage = req.files.featuredImage[0].path;
             }
@@ -114,7 +114,7 @@ exports.deleteGalleryItem = async (req, res) => {
         for (const img of imagesToDelete) {
             if (img && img.includes('cloudinary')) {
                 const publicId = img.split('/').pop().split('.')[0];
-                await cloudinary.uploader.destroy(`interskills-gallery/${publicId}`).catch(err => console.error(err));
+                await cloudinary.uploader.destroy(`intersmart-gallery/${publicId}`).catch(err => console.error(err));
             }
         }
 

@@ -69,7 +69,7 @@ const BrochurePopup = ({ isOpen, onClose, brochureUrl: initialBrochureUrl, title
                 const link = document.createElement('a');
                 link.href = downloadUrl;
                 link.target = '_blank';
-                link.download = `InterSkill_${formData.interest.replace(/\s+/g, '_')}_Brochure.pdf`;
+                link.download = `Intersmart_${formData.interest.replace(/\s+/g, '_')}_Brochure.pdf`;
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);

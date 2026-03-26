@@ -8,7 +8,7 @@ const fs = require('fs');
 const { createCloudinaryStorage } = require('../config/cloudinary');
 const { cloudinary } = require('../config/cloudinary');
 
-const storage = createCloudinaryStorage('interskills-partners');
+const storage = createCloudinaryStorage('intersmart-partners');
 const upload = multer({ storage });
 
 const { protect } = require('../middleware/authMiddleware');
@@ -65,7 +65,7 @@ router.delete('/:id', protect, async (req, res) => {
         // Delete image from Cloudinary
         if (partner.logo) {
             const publicId = partner.logo.split('/').pop().split('.')[0];
-            await cloudinary.uploader.destroy(`interskills-partners/${publicId}`);
+            await cloudinary.uploader.destroy(`intersmart-partners/${publicId}`);
         }
 
         await partner.deleteOne();

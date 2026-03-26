@@ -8,7 +8,7 @@ dotenv.config({ path: path.join(__dirname, '.env') });
 
 const createAdmin = async () => {
     try {
-        await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/interskill');
+        await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/intersmart');
         console.log('MongoDB Connected');
 
         const username = 'admin';

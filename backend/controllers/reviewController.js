@@ -83,7 +83,7 @@ const deleteReview = async (req, res) => {
         if (review.image && review.image.includes('cloudinary')) {
             const publicId = review.image.split('/').pop().split('.')[0];
             const { cloudinary } = require('../config/cloudinary');
-            await cloudinary.uploader.destroy(`interskills-reviews/${publicId}`);
+            await cloudinary.uploader.destroy(`intersmart-reviews/${publicId}`);
         }
 
         await review.deleteOne();
@@ -112,7 +112,7 @@ const updateReview = async (req, res) => {
                 const publicId = review.image.split('/').pop().split('.')[0];
                 try {
                     const { cloudinary } = require('../config/cloudinary');
-                    await cloudinary.uploader.destroy(`interskills-reviews/${publicId}`);
+                    await cloudinary.uploader.destroy(`intersmart-reviews/${publicId}`);
                 } catch (cloudinaryError) {
                     console.error('Error deleting old image from Cloudinary:', cloudinaryError);
                 }

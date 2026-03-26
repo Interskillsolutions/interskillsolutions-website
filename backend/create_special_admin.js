@@ -4,12 +4,12 @@ const Admin = require('./models/Admin');
 
 dotenv.config();
 
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/interskill')
+mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/intersmart')
     .then(async () => {
         console.log('MongoDB Connected');
         try {
             const username = 'admindiwateyash';
-            const password = 'diwateyash$interskillsolutionsthane';
+            const password = 'diwateyash$intersmartinstitute';
 
             const user = await Admin.findOne({ username });
             if (user) {

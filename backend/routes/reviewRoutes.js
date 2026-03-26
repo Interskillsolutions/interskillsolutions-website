@@ -6,7 +6,7 @@ const { protect, admin, staff } = require('../middleware/authMiddleware');
 const multer = require('multer');
 const { createCloudinaryStorage } = require('../config/cloudinary');
 
-const storage = createCloudinaryStorage('interskills-reviews');
+const storage = createCloudinaryStorage('intersmart-reviews');
 const upload = multer({ storage });
 
 router.get('/', getReviews);

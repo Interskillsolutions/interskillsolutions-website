@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
 import API_URL from '../config';
 import BrochurePopup from './BrochurePopup';
-import originLogo from '../assets/tempologo.png';
+import intersmartLogo from '../assets/intersmart_logo.png';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -91,22 +91,26 @@ const Navbar = () => {
             >
                 <div className="container mx-auto px-4 flex justify-between items-center">
                     <Link to="/" className="flex items-center group">
-                        <span className={`font-bold text-white tracking-tight transition-all duration-300 ${scrolled ? 'text-xl' : 'text-2xl'}`}>
-                            Interskill Solutions
-                        </span>
                         <motion.img
                             whileHover={{ rotate: 360 }}
                             transition={{ duration: 0.8 }}
-                            src={originLogo}
-                            alt="InterSkill Solutions"
-                            className={`transition-all duration-300 rounded-none ${scrolled ? 'h-10 w-auto' : 'h-16 w-auto'} -ml-4`}
+                            src={intersmartLogo}
+                            alt="Intersmart Institute"
+                            className={`transition-all duration-300 rounded-none ${scrolled ? 'h-10 w-auto' : 'h-16 w-auto'} mr-4`}
                         />
+                        <span className={`font-bold text-white tracking-tight transition-all duration-300 ${scrolled ? 'text-xl' : 'text-2xl'}`}>
+                            Intersmart Institute of Technology and Management
+                        </span>
                     </Link>
 
                     {/* Desktop Menu */}
                     <div className="hidden md:flex space-x-8 items-center font-medium">
                         <motion.div whileHover="hover" variants={navLinkVariants}>
                             <Link to="/" className="text-gray-300 hover:text-white transition-colors">Home</Link>
+                        </motion.div>
+
+                        <motion.div whileHover="hover" variants={navLinkVariants}>
+                            <Link to="/dual-degree" className="text-gray-300 hover:text-white transition-colors">Dual Degree</Link>
                         </motion.div>
 
                         <div className="relative group/dropdown">
@@ -233,6 +237,7 @@ const Navbar = () => {
                         >
                             <div className="px-4 py-4 space-y-4">
                                 <Link to="/" className="block text-gray-700 hover:text-primary font-medium" onClick={toggleMenu}>Home</Link>
+                                <Link to="/dual-degree" className="block text-gray-700 hover:text-primary font-medium" onClick={toggleMenu}>Dual Degree</Link>
                                 <div>
                                     <button onClick={toggleDropdown} className="flex justify-between w-full text-gray-700 hover:text-primary font-medium">
                                         Services <FaChevronDown className={`transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />

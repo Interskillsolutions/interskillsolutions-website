@@ -36,7 +36,7 @@ const About = () => {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="text-xl text-gray-200 max-w-2xl mx-auto"
                     >
-                        With over 18+ years of experience, Interskill Solutions is dedicated to empowering the next generation of professionals.
+                        With over 18+ years of experience, Intersmart Institute of Technology and Management is dedicated to empowering the next generation of professionals.
                     </motion.p>
                 </div>
             </section>
@@ -50,15 +50,14 @@ const About = () => {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                         >
-                            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Who We Are</h2>
                             <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                                Interskill Solutions is an <span className="font-semibold text-primary">ISO 9001:2015 certified institute</span> based in Thane, Maharashtra. We are dedicated to bridging the gap between industry expectations and aspiring professionals.
+                                Intersmart Institute of Technology and Management is an <span className="font-semibold text-primary">ISO 9001:2015 certified institute</span> based in Thane, Maharashtra. We are dedicated to bridging the gap between industry expectations and aspiring professionals.
                             </p>
                             <p className="text-lg text-gray-600 mb-6 leading-relaxed">
                                 Founded by <span className="font-semibold text-gray-800">Dr. Priya Gawade</span> (PhD, HR expert with 25+ years’ experience), our team of seasoned trainers and mentors brings rich industry insights to help learners build practical, future-ready skills.
                             </p>
                             <p className="text-lg text-gray-600 leading-relaxed font-medium">
-                                Join Interskill Solutions to secure your future with in-demand skills and become part of the next generation of industry-ready professionals.
+                                Join Intersmart Institute of Technology and Management to secure your future with in-demand skills and become part of the next generation of industry-ready professionals.
                             </p>
                         </motion.div>
                         <motion.div
@@ -97,7 +96,7 @@ const About = () => {
                         viewport={{ once: true }}
                         className="text-center mb-16"
                     >
-                        <h2 className="text-4xl font-bold text-gray-800 mb-4">Why Choose <span className="text-primary">InterSkill?</span></h2>
+                        <h2 className="text-4xl font-bold text-gray-800 mb-4">Why Choose <span className="text-primary">Intersmart?</span></h2>
                         <div className="w-24 h-1 bg-accent mx-auto rounded-full"></div>
                     </motion.div>
 
@@ -198,14 +197,14 @@ const About = () => {
                         className="rounded-2xl overflow-hidden shadow-2xl border-4 border-white h-[450px]"
                     >
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d8079.664010854612!2d72.97935434846978!3d19.187354957582116!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b9dd725faa8f%3A0xddf0382f6bb4634a!2sInterskill%20Solutions%20Pvt.%20Ltd!5e1!3m2!1sen!2sin!4v1765263856700!5m2!1sen!2sin"
+                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d8079.664010854612!2d72.97935434846978!3d19.187354957582116!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b9dd725faa8f%3A0xddf0382f6bb4634a!2sIntersmart%20Institute!5e1!3m2!1sen!2sin!4v1765263856700!5m2!1sen!2sin"
                             width="100%"
                             height="100%"
                             style={{ border: 0 }}
                             allowFullScreen=""
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade"
-                            title="Interskill Solutions Location"
+                            title="Intersmart Institute Location"
                         ></iframe>
                     </motion.div>
                 </div>

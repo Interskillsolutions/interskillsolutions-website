@@ -92,8 +92,8 @@ const Contact = () => {
                                 </div>
                                 <div>
                                     <h3 className="font-semibold text-gray-800">Email</h3>
-                                    <a href="mailto:info@interskillsolutions.com" className="block text-gray-600 hover:text-purple-600 transition-colors">info@interskillsolutions.com</a>
-                                    <a href="mailto:placements@interskillsolutions.com" className="block text-gray-600 hover:text-purple-600 transition-colors">placements@interskillsolutions.com</a>
+                                    <a href="mailto:info@intersmart.com" className="block text-gray-600 hover:text-purple-600 transition-colors">info@intersmart.com</a>
+                                    <a href="mailto:placements@intersmart.com" className="block text-gray-600 hover:text-purple-600 transition-colors">placements@intersmart.com</a>
                                 </div>
                             </div>
 
@@ -114,13 +114,13 @@ const Contact = () => {
                         <div className="mt-12">
                             <h3 className="font-semibold text-gray-800 mb-4">Follow Us</h3>
                             <div className="flex space-x-4">
-                                <a href="https://www.facebook.com/interskillsolutionsthane/" target="_blank" rel="noopener noreferrer" className="bg-gray-100 p-3 rounded-full text-gray-600 hover:bg-blue-600 hover:text-white transition-all transform hover:scale-110">
+                                <a href="https://www.facebook.com/intersmartinstitute/" target="_blank" rel="noopener noreferrer" className="bg-gray-100 p-3 rounded-full text-gray-600 hover:bg-blue-600 hover:text-white transition-all transform hover:scale-110">
                                     <FaFacebookF />
                                 </a>
-                                <a href="https://www.linkedin.com/company/interskillsolutions/" target="_blank" rel="noopener noreferrer" className="bg-gray-100 p-3 rounded-full text-gray-600 hover:bg-blue-700 hover:text-white transition-all transform hover:scale-110">
+                                <a href="https://www.linkedin.com/company/intersmart-institute/" target="_blank" rel="noopener noreferrer" className="bg-gray-100 p-3 rounded-full text-gray-600 hover:bg-blue-700 hover:text-white transition-all transform hover:scale-110">
                                     <FaLinkedinIn />
                                 </a>
-                                <a href="https://www.instagram.com/interskill_solutions_institute/" target="_blank" rel="noopener noreferrer" className="bg-gray-100 p-3 rounded-full text-gray-600 hover:bg-pink-600 hover:text-white transition-all transform hover:scale-110">
+                                <a href="https://www.instagram.com/intersmart_institute/" target="_blank" rel="noopener noreferrer" className="bg-gray-100 p-3 rounded-full text-gray-600 hover:bg-pink-600 hover:text-white transition-all transform hover:scale-110">
                                     <FaInstagram />
                                 </a>
                             </div>

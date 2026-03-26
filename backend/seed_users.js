@@ -5,7 +5,7 @@ const path = require('path');
 
 dotenv.config({ path: path.join(__dirname, '.env') });
 
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/interskill')
+mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/intersmart')
     .then(async () => {
         console.log('MongoDB Connected');
 
@@ -17,7 +17,7 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/interskill'
                 password: 'password123', // Will be hashed by pre-save hook
                 role: 'admin',
                 fullName: 'System Administrator',
-                email: 'admin@interskill.com',
+                email: 'admin@intersmart.com',
                 branch: 'Head Office'
             });
             console.log('Created Admin User: admin');
@@ -40,7 +40,7 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/interskill'
                 password: 'password123',
                 role: 'staff',
                 fullName: 'John Staff',
-                email: 'john@interskill.com',
+                email: 'john@intersmart.com',
                 branch: 'Pune Branch'
             });
             console.log('Created Staff User: staff1');

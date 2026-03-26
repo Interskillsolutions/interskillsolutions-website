@@ -5,7 +5,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import AuthContext from '../context/AuthContext';
 
-import logo from '../assets/tempologo.png';
+import logo from '../assets/intersmart_logo.png';
 
 const AdminLogin = () => {
     const [username, setUsername] = useState('');
@@ -32,7 +32,7 @@ const AdminLogin = () => {
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
             <div className="bg-white p-8 rounded-lg shadow-md w-96">
                 <div className="flex justify-center mb-4">
-                    <img src={logo} alt="InterSkill Solutions" className="h-20 w-auto object-contain" />
+                    <img src={logo} alt="Intersmart Institute of Technology and Management" className="h-20 w-auto object-contain" />
                 </div>
                 <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Admin Login</h2>
                 <form onSubmit={handleSubmit}>

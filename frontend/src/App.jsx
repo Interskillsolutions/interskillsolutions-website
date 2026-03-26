@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Layout from './components/Layout';
 import AdminLayout from './components/AdminLayout';
 import Home from './pages/Home';
+import DualDegree from './pages/DualDegree';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import { AuthProvider } from './context/AuthContext';
@@ -33,6 +34,7 @@ function App() {
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Layout><Home /></Layout>} />
+          <Route path="/dual-degree" element={<Layout><DualDegree /></Layout>} />
           <Route path="/about" element={<Layout><About /></Layout>} />
           <Route path="/contact" element={<Layout><Contact /></Layout>} />
           <Route path="/courses" element={<Layout><Courses /></Layout>} />

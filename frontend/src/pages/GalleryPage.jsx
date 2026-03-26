@@ -59,7 +59,7 @@ const GalleryPage = () => {
                         transition={{ delay: 0.2 }}
                         className="text-white/80 max-w-2xl mx-auto text-lg md:text-xl font-medium leading-relaxed"
                     >
-                        Explore the vibrant life at Interskill Solutions. From tech convocations to hands-on workshops and student success stories.
+                        Explore the vibrant life at Intersmart Institute of Technology and Management. From tech convocations to hands-on workshops and student success stories.
                     </motion.p>
                 </div>
             </div>

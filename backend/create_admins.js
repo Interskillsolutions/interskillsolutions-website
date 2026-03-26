@@ -4,7 +4,7 @@ const Admin = require('./models/Admin');
 
 dotenv.config();
 
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/interskill')
+mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/intersmart')
     .then(async () => {
         console.log('MongoDB Connected');
         try {
@@ -21,17 +21,17 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/interskill'
                 console.log("Created 'admin' account.");
             }
 
-            // 2. Create 'yash.interskillsolutions'
-            const yashUser = await Admin.findOne({ username: 'yash.interskillsolutions' });
+            // 2. Create 'yash.intersmartinstitute'
+            const yashUser = await Admin.findOne({ username: 'yash.intersmartinstitute' });
             if (yashUser) {
                 yashUser.role = 'admin';
-                yashUser.password = 'interskillsolutions$yash'; // Reset password as requested
+                yashUser.password = 'intersmartinstitute$yash'; // Reset password as requested
                 await yashUser.save();
-                console.log("Updated 'yash.interskillsolutions' (password reset + admin role).");
+                console.log("Updated 'yash.intersmartinstitute' (password reset + admin role).");
             } else {
                 await Admin.create({
-                    username: 'yash.interskillsolutions',
-                    password: 'interskillsolutions$yash',
+                    username: 'yash.intersmartinstitute',
+                    password: 'intersmartinstitute$yash',
                     role: 'admin'
                 });
                 console.log("Created 'yash.interskillsolutions' account.");

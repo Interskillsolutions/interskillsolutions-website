@@ -94,7 +94,7 @@ const AdminLeads = () => {
         })));
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, "Leads");
-        XLSX.writeFile(workbook, "Interskill_Leads.xlsx");
+        XLSX.writeFile(workbook, "Intersmart_Leads.xlsx");
     };
 
     return (

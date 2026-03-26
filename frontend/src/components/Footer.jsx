@@ -1,6 +1,6 @@
 import { FaFacebook, FaInstagram, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import logoBlue from '../assets/tempologo.png';
+import logoBlue from '../assets/intersmart_logo.png';
 
 const Footer = () => {
     const footerVariants = {
@@ -22,7 +22,7 @@ const Footer = () => {
                 className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12"
             >
                 <motion.div variants={footerVariants}>
-                    <img src={logoBlue} alt="InterSkill Solutions" className="h-20 w-20 object-contain mb-6" />
+                    <img src={logoBlue} alt="Intersmart Institute of Technology and Management" className="h-20 w-20 object-contain mb-6" />
                     <p className="text-gray-400 leading-relaxed">
                         Bridging the gap between industry expectations and aspiring professionals with expert training and mentorship.
                     </p>
@@ -78,8 +78,8 @@ const Footer = () => {
                         <div className="flex items-center hover:text-white transition-colors mt-3">
                             <span className="mr-3 text-lg">📧</span>
                             <div>
-                                <a href="mailto:info@interskillsolutions.com" className="block hover:text-accent">info@interskillsolutions.com</a>
-                                <a href="mailto:placements@interskillsolutions.com" className="block hover:text-accent">placements@interskillsolutions.com</a>
+                                <a href="mailto:info@intersmart.com" className="block hover:text-accent">info@intersmart.com</a>
+                                <a href="mailto:placements@intersmart.com" className="block hover:text-accent">placements@intersmart.com</a>
                             </div>
                         </div>
                     </div>
@@ -88,13 +88,13 @@ const Footer = () => {
                 <motion.div variants={footerVariants}>
                     <h3 className="text-xl font-bold mb-6 text-accent">Follow Us</h3>
                     <div className="flex space-x-4">
-                        <motion.a whileHover={{ scale: 1.2, rotate: 5 }} href="https://www.facebook.com/interskillsolutionsthane/" target="_blank" rel="noopener noreferrer" className="bg-gray-800 p-3 rounded-full text-gray-400 hover:text-white hover:bg-primary transition-colors">
+                        <motion.a whileHover={{ scale: 1.2, rotate: 5 }} href="https://www.facebook.com/intersmartinstitute/" target="_blank" rel="noopener noreferrer" className="bg-gray-800 p-3 rounded-full text-gray-400 hover:text-white hover:bg-primary transition-colors">
                             <FaFacebook size={20} />
                         </motion.a>
-                        <motion.a whileHover={{ scale: 1.2, rotate: 5 }} href="https://www.instagram.com/interskill_solutions_institute/" target="_blank" rel="noopener noreferrer" className="bg-gray-800 p-3 rounded-full text-gray-400 hover:text-white hover:bg-primary transition-colors">
+                        <motion.a whileHover={{ scale: 1.2, rotate: 5 }} href="https://www.instagram.com/intersmart_institute/" target="_blank" rel="noopener noreferrer" className="bg-gray-800 p-3 rounded-full text-gray-400 hover:text-white hover:bg-primary transition-colors">
                             <FaInstagram size={20} />
                         </motion.a>
-                        <motion.a whileHover={{ scale: 1.2, rotate: 5 }} href="https://www.linkedin.com/company/interskillsolutions/" target="_blank" rel="noopener noreferrer" className="bg-gray-800 p-3 rounded-full text-gray-400 hover:text-white hover:bg-primary transition-colors">
+                        <motion.a whileHover={{ scale: 1.2, rotate: 5 }} href="https://www.linkedin.com/company/intersmart-institute/" target="_blank" rel="noopener noreferrer" className="bg-gray-800 p-3 rounded-full text-gray-400 hover:text-white hover:bg-primary transition-colors">
                             <FaLinkedin size={20} />
                         </motion.a>
                     </div>
@@ -107,7 +107,7 @@ const Footer = () => {
                 transition={{ delay: 0.5 }}
                 className="text-center mt-12 pt-8 border-t border-gray-800 text-gray-500 text-sm"
             >
-                &copy; {new Date().getFullYear()} InterSkill Solutions. All rights reserved.
+                &copy; {new Date().getFullYear()} Intersmart Institute of Technology and Management. All rights reserved.
             </motion.div>
 
             <motion.a

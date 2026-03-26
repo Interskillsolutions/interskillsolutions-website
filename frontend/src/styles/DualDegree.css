@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+
+.dual-degree-page {
+  --primary: #00E5FF;
+  --primary-glow: rgba(0, 229, 255, 0.4);
+  --secondary: #7C4DFF;
+  --secondary-glow: rgba(124, 77, 255, 0.4);
+}
+
+.dual-degree-page .font-outfit {
+  font-family: 'Outfit', sans-serif;
+}
+
+.dual-degree-page h1, 
+.dual-degree-page h2, 
+.dual-degree-page h3, 
+.dual-degree-page h4 {
+  font-family: 'Outfit', sans-serif !important;
+}
+
+.dual-degree-page .glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+}
+
+.dual-degree-page .btn-primary {
+  background-color: #00E5FF !important;
+  color: #05070A !important;
+  font-weight: 700;
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+}
+
+.dual-degree-page .btn-primary:hover {
+  box-shadow: 0 0 25px rgba(0, 229, 255, 0.6);
+  transform: scale(1.05);
+}
+
+.dual-degree-page .btn-secondary {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  color: white !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  font-weight: 700;
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+}
+
+.dual-degree-page .gradient-text {
+  background: linear-gradient(to right, #00E5FF, #7C4DFF);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dual-degree-page .section-heading {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .dual-degree-page .section-heading {
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+}
+
+.dual-degree-page .mesh-bg {
+  background-color: #05070a;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(0, 229, 255, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(124, 77, 255, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(0, 229, 255, 0.1) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(124, 77, 255, 0.1) 0px, transparent 50%);
+}
+
+.dual-degree-page .text-primary {
+  color: #00E5FF !important;
+}
+
+.dual-degree-page .bg-primary {
+  background-color: #00E5FF !important;
+}
+
+.dual-degree-page .border-primary {
+  border-color: #00E5FF !important;
+}

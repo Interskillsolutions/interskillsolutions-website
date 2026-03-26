@@ -7,7 +7,7 @@ const Course = require('./models/Course');
 const path = require('path');
 dotenv.config({ path: path.join(__dirname, '.env') });
 
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/interskill')
+mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/intersmart')
     .then(async () => {
         console.log('MongoDB Connected');
 
