@@ -35,6 +35,7 @@ const categoryRoutes = require('./routes/categoryRoutes');
 const requestRoutes = require('./routes/requestRoutes');
 const messageRoutes = require('./routes/messageRoutes');
 const galleryRoutes = require('./routes/galleryRoutes');
+const dualDegreeRoutes = require('./routes/dualDegreeRoutes');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/courses', courseRoutes);
@@ -46,6 +47,7 @@ app.use('/api/categories', categoryRoutes);
 app.use('/api/requests', requestRoutes);
 app.use('/api/messages', messageRoutes);
 app.use('/api/gallery', galleryRoutes);
+app.use('/api/dual-degree', dualDegreeRoutes);
 
 app.get('/', (req, res) => {
     res.send('API is running...');

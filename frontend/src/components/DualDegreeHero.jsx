@@ -17,7 +17,11 @@ const DualDegreeHero = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(`${API_URL}/api/leads`, formData);
+            await axios.post(`${API_URL}/api/leads`, {
+                ...formData,
+                source: 'Consultation',
+                interest: 'Dual Degree Program'
+            });
             alert('Consultation booked successfully!');
             setFormData({ name: '', email: '', phone: '' });
         } catch (error) {

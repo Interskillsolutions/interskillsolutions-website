@@ -25,6 +25,8 @@ import CourseDetail from './pages/CourseDetail';
 import GalleryPage from './pages/GalleryPage';
 import GalleryDetail from './pages/GalleryDetail';
 import AdminGallery from './pages/AdminGallery';
+import AdminDualDegree from './pages/AdminDualDegree';
+import AdminDualDegreeForm from './pages/AdminDualDegreeForm';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -58,6 +60,9 @@ function App() {
             <Route path="courses" element={<AdminCourses />} />
             <Route path="courses/add" element={<AdminCourseForm />} />
             <Route path="courses/edit/:id" element={<AdminCourseForm />} />
+            <Route path="dual-degree" element={<AdminDualDegree />} />
+            <Route path="dual-degree/add" element={<AdminDualDegreeForm />} />
+            <Route path="dual-degree/edit/:id" element={<AdminDualDegreeForm />} />
           </Route>
         </Routes>
         <ToastContainer position="top-right" autoClose={3000} />
