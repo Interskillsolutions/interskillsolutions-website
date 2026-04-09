@@ -75,6 +75,16 @@ const Footer = () => {
                                 </a>
                             </div>
                         </div>
+                        <div className="flex items-start">
+                            <span className="mr-3 mt-1 text-lg">📍</span>
+                            <div>
+                                <p className="font-semibold text-white mb-1">Nerul Branch:</p>
+                                <p>104, Jagannath Niwas, Sector 20 Nerul west, Opposite Nerul Railway Station</p>
+                                <a href="tel:9321350477" className="text-gray-400 hover:text-white transition-colors block mt-1">
+                                    📞 +91 93213 50477
+                                </a>
+                            </div>
+                        </div>
                         <div className="flex items-center hover:text-white transition-colors mt-3">
                             <span className="mr-3 text-lg">📧</span>
                             <div>

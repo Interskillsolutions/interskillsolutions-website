@@ -73,14 +73,18 @@ const Contact = () => {
                                 </div>
                                 <div className="w-full">
                                     <h3 className="font-semibold text-gray-800">Phone</h3>
-                                    <div className="flex flex-col sm:flex-row sm:justify-between w-full pr-4">
+                                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full pr-4">
                                         <div>
                                             <span className="text-sm text-gray-500 block">Thane Branch:</span>
                                             <a href="tel:9819461050" className="block text-gray-600 hover:text-indigo-600 transition-colors font-medium">98194 61050</a>
                                         </div>
-                                        <div className="mt-2 sm:mt-0">
+                                        <div>
                                             <span className="text-sm text-gray-500 block">Andheri Branch:</span>
                                             <a href="tel:9136264656" className="block text-gray-600 hover:text-indigo-600 transition-colors font-medium">91362 64656</a>
+                                        </div>
+                                        <div>
+                                            <span className="text-sm text-gray-500 block">Nerul Branch:</span>
+                                            <a href="tel:9321350477" className="block text-gray-600 hover:text-indigo-600 transition-colors font-medium">93213 50477</a>
                                         </div>
                                     </div>
                                 </div>
@@ -106,7 +110,10 @@ const Contact = () => {
                                     <p className="text-gray-600 text-sm mb-3">505, 5th floor, Paradise Tower, Station Rd, Naupada, Thane West 400602</p>
 
                                     <h3 className="font-semibold text-gray-800 mb-1">Andheri Location</h3>
-                                    <p className="text-gray-600 text-sm">Office No.14, Ground Floor, S.V. Road, Andheri West 400058</p>
+                                    <p className="text-gray-600 text-sm mb-3">Office No.14, Ground Floor, S.V. Road, Andheri West 400058</p>
+                                    
+                                    <h3 className="font-semibold text-gray-800 mb-1">Nerul Location</h3>
+                                    <p className="text-gray-600 text-sm">104, Jagannath Niwas, Sector 20 Nerul west, Opposite Nerul Railway Station</p>
                                 </div>
                             </div>
                         </div>
