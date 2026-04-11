@@ -84,7 +84,7 @@ const Contact = () => {
                                         </div>
                                         <div>
                                             <span className="text-sm text-gray-500 block">Nerul Branch:</span>
-                                            <a href="tel:9321350477" className="block text-gray-600 hover:text-indigo-600 transition-colors font-medium">93213 50477</a>
+                                            <a href="tel:8425984197" className="block text-gray-600 hover:text-indigo-600 transition-colors font-medium">84259 84197</a>
                                         </div>
                                     </div>
                                 </div>

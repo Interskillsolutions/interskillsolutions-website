@@ -80,8 +80,8 @@ const Footer = () => {
                             <div>
                                 <p className="font-semibold text-white mb-1">Nerul Branch:</p>
                                 <p>104, Jagannath Niwas, Sector 20 Nerul west, Opposite Nerul Railway Station</p>
-                                <a href="tel:9321350477" className="text-gray-400 hover:text-white transition-colors block mt-1">
-                                    📞 +91 93213 50477
+                                <a href="tel:8425984197" className="text-gray-400 hover:text-white transition-colors block mt-1">
+                                    📞 +91 84259 84197
                                 </a>
                             </div>
                         </div>
